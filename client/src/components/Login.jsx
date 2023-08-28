@@ -1,7 +1,8 @@
+import { useState } from "react";
 
 
-function Login({ onLogin, onLogout}) {
-    return <h1>This i sLogin</h1>
+function Login() {
+    return null
 }
 
 export default Login

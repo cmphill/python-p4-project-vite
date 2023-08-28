@@ -31,14 +31,10 @@ function App() {
   }
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login  onLogin={handleLogin} onLogout={handleLogout}/>}/>
-        <Route path="signup" element={<SignUpForm />} />
-        <Route path="community" element={<Community />} />
-        <Route path="personal" element={<Personal />} />
-
-      </Route>
+      <Route
+      path="/home"
+      element={<Home />}
+      />
       
   )
   )
