@@ -1,6 +1,5 @@
 import React from 'react';
 import {NavLink, Outlet} from 'react-router-dom';
-import Search from './Search.jsx';
 
 function Layout() {
     console.log('hello')
@@ -14,9 +13,9 @@ function Layout() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="community"> Community </NavLink>
             <NavLink to="personal"> Personal </NavLink>
-            <NavLink to="login"> Sign Up </NavLink>
+            <NavLink to="login"> Log In </NavLink>
+            <NavLink to="signup"> Sign Up </NavLink>
           </nav>
-          <Search onSearchMemorabilia={onSearchMemorabilia} />
         </div>
       </header>
       <main>
