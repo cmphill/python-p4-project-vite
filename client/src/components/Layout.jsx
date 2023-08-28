@@ -2,7 +2,8 @@ import React from 'react';
 import {NavLink, Outlet} from 'react-router-dom';
 import Search from './Search.jsx';
 
-function Layout {
+function Layout() {
+    console.log('hello')
 
     return( 
     
