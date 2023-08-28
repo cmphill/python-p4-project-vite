@@ -112,13 +112,7 @@ class TripComment(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    @validates("content")
-    def validate_content(self, key, value):
-        if len(value) < 0 and len(value) > 500:
-            raise ValueError("Content must be between 0 and 500 characters")
-        return value
-
-    serialize_rules = ("-users.trip_comments", "-trips","-users.signups","-users._password_hash","-users.community_comments",)
+    serialize_rules = ("-users.trip_comments", "-trips.trip_comments","-users.signups", "-trips.signups",)
 
 class CommunityComment(db.Model, SerializerMixin):
     __tablename__ = 'community_comments'
@@ -128,11 +122,5 @@ class CommunityComment(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
-    
-    @validates("content")
-    def validate_content(self, key, value):
-        if len(value) < 0 and len(value) > 500:
-            raise ValueError("Content must be between 0 and 500 characters")
-        return value
 
-    serialize_rules = ("-users.community_comments","-users.trip_comments","-users._password_hash",)
+    serialize_rules = ("-users.community_comments",)
