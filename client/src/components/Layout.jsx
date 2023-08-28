@@ -3,6 +3,8 @@ import {NavLink, Outlet} from 'react-router-dom';
 
 
 function Layout() {
+function Layout() {
+    console.log('hello')
 
     return( 
     
