@@ -1,5 +1,6 @@
-import React from 'react';
+
 import {NavLink, Outlet} from 'react-router-dom';
+
 
 function Layout() {
     console.log('hello')
@@ -10,6 +11,7 @@ function Layout() {
         <header>
         <div className="NavBar">
           <nav>
+            <img src='./assets/logo.png'/>
             <NavLink to="/">Home</NavLink>
             <NavLink to="community"> Community </NavLink>
             <NavLink to="personal"> Personal </NavLink>
