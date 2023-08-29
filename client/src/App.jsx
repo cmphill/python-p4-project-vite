@@ -5,11 +5,22 @@ import Community from './components/Community.jsx';
 import Home from './components/Home.jsx';
 import Personal from './components/Personal.jsx';
 import Login from './components/Login.jsx';
-import SignUpForm from './components/SignupForm';
-import Layout from './Layout/Layout.jsx';
+
 
 
 function App() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("/check_session").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    })
+  }, [])
+
+  if (!user) return <Login onLogin={setUser}/>
 
   const [user, setUser] = useState(null);
 
@@ -32,9 +43,16 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route
-      path="/home"
-      element={<Home />}
-      />
+      path="/"
+      element={<Layout />}
+      >
+        <Route index element={<Home />} />
+        <Route path="login" element={<Login />}/>
+        <Route path="signup" element={<SignupForm />} />
+        <Route path="community" element={<Community />} />
+        <Route path="personal" element={<Personal />} />
+
+      </Route>
       
   )
   )

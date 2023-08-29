@@ -2,6 +2,7 @@
     width: 100%;
     height: 50px;
     background-color: black;
+<<<<<<< HEAD
     color: white;
 }
 
@@ -18,4 +19,7 @@
 .menu ul li{
     list-style-type: none;
     padding-right: 10px;
+=======
+    font-;
+>>>>>>> d988350 (added the menu and some addl routing)
 }
