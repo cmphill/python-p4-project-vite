@@ -11,7 +11,7 @@ function Layout() {
         <header>
         <div className="NavBar">
           <nav>
-            <img src='./assets/logo.png'/>
+            <img src='../assets/Triply_logo.png'/>
             <NavLink to="/">Home</NavLink>
             <NavLink to="community"> Community </NavLink>
             <NavLink to="personal"> Personal </NavLink>

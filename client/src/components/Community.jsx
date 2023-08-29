@@ -1,6 +1,6 @@
 
 function Community() {
-    return null
+    return <h1>This is community</h1>
 }
 
 export default Community;

@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@formfield/react": "^1.0.0-alpha.21",
-    "react": "^18.2.0"
-  }
-}

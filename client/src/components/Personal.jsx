@@ -2,7 +2,7 @@
 
 function Personal() {
 
-    return null
+    return <h1>THis is personal</h1>
 }
 
 export default Personal
