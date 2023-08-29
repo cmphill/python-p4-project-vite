@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { Form, FormField, Error }from '@formfield/react/dist/index' ;
+import {useState} from 'react';
+import { NavLink, Outlet } from "react-router-dom";
 
-function Login({ onLogin }) {
+function Login({ onLogin, onLogout}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState("")
@@ -27,8 +29,22 @@ function Login({ onLogin }) {
             }
         })
     }
+    function handleLogout() {
+        setIsLoading(true);
+        fetch("/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((r) => {
+            setIsLoading(false);
+            if (r.ok) {
+                onLogout()
+            } 
+        })
+    }
     return (
-        <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
             <FormField>
                 <label>Username</label>
                 <input
@@ -46,12 +62,12 @@ function Login({ onLogin }) {
                 />
             </FormField>
             <FormField>
-                <Button>{isLoading ? "Loading..." : "Login"} </Button>
+                <button>{isLoading ? "Loading..." : "Login"} </button>
             </FormField>
             <FormField>
                 {errors.map((err) => (<Error key={err}>{err}</Error>))}
             </FormField>
-        </form>
+            </Form>
     )
 }
 

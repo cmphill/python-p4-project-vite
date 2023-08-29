@@ -1,13 +1,13 @@
 import './App.css';
 import {createBrowserRouter, Route, createRoutesFromElements, RouterProvider} from 'react-router-dom';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import Community from './components/Community.jsx';
 import Home from './components/Home.jsx';
 import Personal from './components/Personal.jsx';
 import Login from './components/Login.jsx';
 import SignUpForm from './components/SignupForm';
 import Menu from './components/Menu.jsx';
-
+import Layout from './components/Layout.jsx';
 
 
 function App() {
@@ -21,17 +21,23 @@ function App() {
       }
     })
   }, [])
-
+  
   if (!user) return <Login onLogin={setUser}/>
-
+  
+  function handleLogin(user) {
+    setUser(user);
+  }
+  function handleLogout() {
+    setUser(null);
+  }
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route
       path="/"
       element={<Layout />}
       >
-        <Route index element={<Home menu={Menu}/>} />
-        <Route path="login" element={<Login menu={Menu}/>}/>
+        <Route index element={<Home />} />
+        <Route path="login" element={<Login menu={Menu} onLogin={handleLogin} onLogout={handleLogout}/>}/>
         <Route path="signup" element={<SignUpForm menu={Menu}/>} />
         <Route path="community" element={<Community menu={Menu}/>} />
         <Route path="personal" element={<Personal menu={Menu}/>} />
