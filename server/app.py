@@ -53,6 +53,7 @@ class Users(Resource):
             return newUser.to_dict(rules=('-_password_hash')), 201
         else:
             return {'error': 'Could not create new user'}, 422
+<<<<<<< HEAD
 
 class UserById(Resource):
     def get(self, id):
@@ -84,19 +85,39 @@ class UserById(Resource):
             return '', 204
         else:
             return {'error': 'Could not find user'}, 404
+=======
+>>>>>>> e45de08 (entirety of backend)
 
 class UserById(Resource):
     def get(self, id):
         user = User.query.filter_by(id=id).first()
-        return user.to_dict(), 200
+        if user:
+            return user.to_dict(), 200
+        else:
+            return {'error': 'Could not find user'}, 404
     def patch(self, id):
-        data = request.get_json()
         user = User.query.filter_by(id=id).first()
-        # need to work on patch funcionality
-        db.session.add(user)
-        db.session.commit()
-        return user.to_dict(), 200
-api.add_resource(UserById, '/users/<int:id>')
+        if user:
+            try:
+                for attr in request.get_json():
+                    setattr(user, attr, request.get_json()[attr])
+
+                db.session.add(user)
+                db.session.commit()
+                return user.to_dict(rules=('-_password_hash',)), 200
+            
+            except:
+                return {'error': 'Could not update user'}, 422
+        else:
+            return {'error': 'Could not find user'}, 404
+    def delete(self, id):
+        user = User.query.filter_by(id=id).first()
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            return '', 204
+        else:
+            return {'error': 'Could not find user'}, 404
 
 class Trips(Resource):
     def get(self):
