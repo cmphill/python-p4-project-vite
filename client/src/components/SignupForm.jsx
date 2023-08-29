@@ -5,6 +5,7 @@ function SignUpForm ({onLogin}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [location, setLocation] = useState("");
   const [age, setAge] = useState("");
   const [bio, setBio] = useState("");
   const [errors, setErrors] = useState([]);
@@ -25,6 +26,7 @@ function handleSubmit(e) {
       username: username,
       password: password,
       password_confirmation: passwordConfirmation,
+      location: location,
       age: age,
       bio: bio
     }),
@@ -61,6 +63,14 @@ return (
       value={passwordConfirmation}
       onChange={(e) => setPasswordConfirmation(e.target.value)} />
     </FormField>
+    <FormField>
+      <Label name='location'>Location</Label>
+      <Input
+      type='text'
+      value={location}
+      onChange={(e) => setLocation(e.target.value)} />
+    </FormField>
+
     <FormField>
       <Label name='age'>Age</Label>
       <Input
