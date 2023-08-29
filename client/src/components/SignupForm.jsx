@@ -9,7 +9,7 @@ function SignUpForm ({onLogin}) {
   const [bio, setBio] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-}
+
 
 
 function handleSubmit(e) {
@@ -36,6 +36,7 @@ function handleSubmit(e) {
       r.json().then((err) => setErrors(err.errors))
     }
   })
+}
 
 return (
   <form onSubmit={handleSubmit}>
@@ -85,3 +86,5 @@ return (
   </form>
 )
 }
+
+export default SignUpForm;
