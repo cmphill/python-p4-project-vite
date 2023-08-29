@@ -5,7 +5,13 @@ import Community from './components/Community.jsx';
 import Home from './components/Home.jsx';
 import Personal from './components/Personal.jsx';
 import Login from './components/Login.jsx';
+<<<<<<< HEAD
 
+=======
+import SignUpForm from './components/SignupForm';
+import Menu from './components/Menu.jsx';
+import Layout from './components/Layout.jsx';
+>>>>>>> d18612d (troubleshooting)
 
 
 function App() {
@@ -19,8 +25,9 @@ function App() {
       }
     })
   }, [])
-
+  
   if (!user) return <Login onLogin={setUser}/>
+<<<<<<< HEAD
 
   const [user, setUser] = useState(null);
 
@@ -34,6 +41,9 @@ function App() {
   }, [])
   
 
+=======
+  
+>>>>>>> d18612d (troubleshooting)
   function handleLogin(user) {
     setUser(user);
   }
@@ -47,10 +57,17 @@ function App() {
       element={<Layout />}
       >
         <Route index element={<Home />} />
+<<<<<<< HEAD
         <Route path="login" element={<Login />}/>
         <Route path="signup" element={<SignupForm />} />
         <Route path="community" element={<Community />} />
         <Route path="personal" element={<Personal />} />
+=======
+        <Route path="login" element={<Login menu={Menu} onLogin={handleLogin} onLogout={handleLogout}/>}/>
+        <Route path="signup" element={<SignUpForm menu={Menu}/>} />
+        <Route path="community" element={<Community menu={Menu}/>} />
+        <Route path="personal" element={<Personal menu={Menu}/>} />
+>>>>>>> d18612d (troubleshooting)
 
       </Route>
       
