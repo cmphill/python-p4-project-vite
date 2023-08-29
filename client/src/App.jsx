@@ -14,15 +14,15 @@ function App() {
 
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    fetch("/check_session").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch("/check_session").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+  //   })
+  // }, [])
   
-  if (!user) return <Login onLogin={setUser}/>
+  // if (!user) return <Login onLogin={setUser}/>
   
   function handleLogin(user) {
     setUser(user);
@@ -37,10 +37,10 @@ function App() {
       element={<Layout />}
       >
         <Route index element={<Home />} />
-        <Route path="login" element={<Login menu={Menu} onLogin={handleLogin} onLogout={handleLogout}/>}/>
-        <Route path="signup" element={<SignUpForm menu={Menu}/>} />
-        <Route path="community" element={<Community menu={Menu}/>} />
-        <Route path="personal" element={<Personal menu={Menu}/>} />
+        <Route path="login" element={<Login onLogin={handleLogin} onLogout={handleLogout}/>}/>
+        {/* <Route path="signup" element={<SignUpForm/>} /> */}
+        <Route path="community" element={<Community/>} />
+        <Route path="personal" element={<Personal/>} />
 
       </Route>
       
