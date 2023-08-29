@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -79,6 +80,12 @@ export const SignupForm = () => {
         <br />
 
 function SignUpForm ({onLogin}) {
+=======
+import { useState } from "react";
+import { Formik, Form, Field } from "formik";
+
+function SignUpForm() {
+>>>>>>> 93cae28 (formik)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -95,90 +102,112 @@ function SignUpForm ({onLogin}) {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleSubmit = (values, { setSubmitting }) => {
+    setErrors([]);
+    setIsLoading(true);
+    fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    })
+      .then((response) => {
+        setIsLoading(false);
+        if (response.ok) {
+          response.json().then((user) => onLogin(user));
+        } else {
+          response.json().then((err) => setErrors(err.errors));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-
-function handleSubmit(e) {
-  e.preventDefault();
-  setErrors([])
-  setIsLoading(true);
-  fetch("/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-      password_confirmation: passwordConfirmation,
-      location: location,
-      age: age,
-      bio: bio
-    }),
-  }).then((r) => {
-    setIsLoading(false);
-    if (r.ok) {
-      r.json().then((user) => onLogin(user))
-    } else {
-      r.json().then((err) => setErrors(err.errors))
-    }
-  })
-}
-
-return (
-  <form onSubmit={handleSubmit}>
-    <FormField>
-      <Label name='username'>Username</Label>
-      <Input
-      type='text'
-      value={username}
-      onChange={(e) => setUsername(e.target.value)} />
-    </FormField>
-    <FormField>
-      <Label name='password'>Password</Label>
-      <Input
-      type='password'
-      value={password}
-      onChange={(e) => setPassword(e.target.value)} />
-    </FormField>
-    <FormField>
-      <Label name='passwordConfirmation'>Password Confirmation</Label>
-      <Input
-      type='password'
-      value={passwordConfirmation}
-      onChange={(e) => setPasswordConfirmation(e.target.value)} />
-    </FormField>
-    <FormField>
-      <Label name='location'>Location</Label>
-      <Input
-      type='text'
-      value={location}
-      onChange={(e) => setLocation(e.target.value)} />
-    </FormField>
-
-    <FormField>
-      <Label name='age'>Age</Label>
-      <Input
-      type='number'
-      value={age}
-      onChange={(e) => setAge(e.target.value)} />
-    </FormField>
-    <FormField>
-      <Label name='bio'>Bio</Label>
-      <Input
-      type='text'
-      value={bio}
-      onChange={(e) => setBio(e.target.value)} />
-    </FormField>
-    <FormField>
-      <Button type='submit'> {isLoading ? "Loading" : "Sign up"}</Button>
-    </FormField>
-    <FormField>
-      {errors.map((error) => (
-        <Error key={error}>{error}</Error>
-      ))}
-    </FormField>
-  </form>
-)
+  return (
+    <Formik
+      initialValues={{
+        username,
+        password,
+        passwordConfirmation,
+        location,
+        age,
+        bio
+      }}
+      onSubmit={handleSubmit}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        isSubmitting,
+        handleChange,
+        handleBlur,
+        handleSubmit
+      }) => (
+        <Form>
+          <Field
+            name="username"
+            label="Username"
+            type="text"
+            value={values.username}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <Field
+            name="password"
+            label="Password"
+            type="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <Field
+            name="passwordConfirmation"
+            label="Password Confirmation"
+            type="password"
+            value={values.passwordConfirmation}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <Field
+            name="location"
+            label="Location"
+            type="text"
+            value={values.location}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <Field
+            name="age"
+            label="Age"
+            type="number"
+            value={values.age}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <Field
+            name="bio"
+            label="Bio"
+            type="text"
+            value={values.bio}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <button
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Loading" : "Sign up"}
+          </button>
+          {errors.map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
+        </Form>
+      )}
+    </Formik>
+  );
 }
 
 export default SignUpForm;

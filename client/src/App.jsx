@@ -18,14 +18,15 @@ function App() {
 
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    fetch("/check_session").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch("/check_session").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+  //   })
+  // }, [])
   
+<<<<<<< HEAD
   if (!user) return <Login onLogin={setUser}/>
 <<<<<<< HEAD
 
@@ -39,6 +40,9 @@ function App() {
     })
     .then( () => console.log(user))
   }, [])
+=======
+  // if (!user) return <Login onLogin={setUser}/>
+>>>>>>> 93cae28 (formik)
   
 
 =======
@@ -58,6 +62,7 @@ function App() {
       >
         <Route index element={<Home />} />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Route path="login" element={<Login />}/>
         <Route path="signup" element={<SignupForm />} />
         <Route path="community" element={<Community />} />
@@ -68,6 +73,12 @@ function App() {
         <Route path="community" element={<Community menu={Menu}/>} />
         <Route path="personal" element={<Personal menu={Menu}/>} />
 >>>>>>> d18612d (troubleshooting)
+=======
+        <Route path="login" element={<Login onLogin={handleLogin} onLogout={handleLogout}/>}/>
+        {/* <Route path="signup" element={<SignUpForm/>} /> */}
+        <Route path="community" element={<Community/>} />
+        <Route path="personal" element={<Personal/>} />
+>>>>>>> 93cae28 (formik)
 
       </Route>
       

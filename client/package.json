@@ -12,12 +12,16 @@
     "dependencies": {
         "@formfield/react": "^1.0.0-alpha.21",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "formik": "^2.4.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.15.0",
         "yup": "^1.2.0"
 =======
+=======
+        "formik": "^2.4.3",
+>>>>>>> 93cae28 (formik)
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.15.0"
