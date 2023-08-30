@@ -201,9 +201,7 @@ function SignUpForm() {
           >
             {isSubmitting ? "Loading" : "Sign up"}
           </button>
-          {errors.map((error, index) => (
-            <p key={index}>{error}</p>
-          ))}
+         
         </Form>
       )}
     </Formik>
