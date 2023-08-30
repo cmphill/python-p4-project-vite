@@ -1,123 +1,75 @@
-import { useState } from "react";
-import { Formik, Form, Field } from "formik";
-import * as Yup from 'yup';
+import { useState, } from "react";
+import { useFormik} from "formik";
+import { useNavigate } from "react-router-dom"
+import * as yup from 'yup';
 
+export default function SignUpForm({addUser}) {
+    const navigate = useNavigate();
+    const [errors, setError] = useState()
 
-function SignUpForm ({onLogin}) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [location, setLocation] = useState("");
-  const [age, setAge] = useState("");
-  const [bio, setBio] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = (values) => {
-    setErrors([]);
-    setIsLoading(true);
-    fetch("/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(values)
+    const formSchema = yup.object().shape({
+        username: yup.string().max(16, "Must be 16 characters or less").required("Must enter a username"),
+        password: yup.string().max(20, "Must be 20 characters or less").required("Must enter a password"),
+        password_confirmation: yup.string().max(20, "Must be 20 characters or less").required("Must enter a password confirmation"),
+        age: yup.number().required("Must enter an age number"),
+        location: yup.string().required("Must enter a location"),
+        bio: yup.string().max(500, "Bio must be less than 500 characters")
     })
-      .then((response) => {
-        setIsLoading(false);
-        if (response.ok) {
-          response.json().then((user) => onLogin(user));
-        } else {
-          response.json().then((err) => setErrors(err.errors));
+
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+            password_confirmation: '',
+            age: '',
+            location: '',
+            bio: '',
+        },
+        validationSchema: formSchema,         
+        onSubmit: (values) => {
+            fetch("/users", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body : JSON.stringify(values, null, 2),
+            }).then( res => {
+                if(res.ok) {
+                    res.json().then(user => addUser(user))
+                    navigate('/')
+                    
+                }
+                else {
+                    res.json().then(errors => setError(errors.message))
+                }
+            })
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    })
 
-  return (
-    <Formik
-      initialValues={{
-        username,
-        password,
-        passwordConfirmation,
-        location,
-        age,
-        bio
-      }}
-      onSubmit={handleSubmit}
-    >
-      {({
-        values,
-        errors,
-        isSubmitting,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      }) => (
-        <Form>
-          <Field
-            name="username"
-            label="Username"
-            type="text"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Field
-            name="password"
-            label="Password"
-            type="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Field
-            name="passwordConfirmation"
-            label="Password Confirmation"
-            type="password"
-            value={values.passwordConfirmation}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Field
-            name="location"
-            label="Location"
-            type="text"
-            value={values.location}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Field
-            name="age"
-            label="Age"
-            type="number"
-            value={values.age}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Field
-            name="bio"
-            label="Bio"
-            type="text"
-            value={values.bio}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <button
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Loading" : "Sign up"}
-          </button>
-          {/* {errors.map((error, index) => (
-            <p key={index}>{error}</p>
-          ))} */}
-        </Form>
-      )}
-    </Formik>
-  );
+    return (
+        <div className="signup-container">
+            <form onSubmit={formik.handleSubmit}>
+                {formik.errors&& Object.values(formik.errors).map(error => <h3 style={{color: "green"}}>{error.toUpperCase()}</h3>)}
+                <label>Username</label> 
+                <input type="text" name="username" placeholder="username" value={formik.values.username} onChange={formik.handleChange} />
+
+                <label>Password</label>
+                <input type="text" name="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} />
+
+                <label>Password Confirmation</label>
+                <input type="text" name="password_confirmation" placeholder="Password Confirmation" value={formik.values.password_confirmation} onChange={formik.handleChange} />
+
+                <label>Location</label>
+                <input type="text" name="location" placeholder="location" value={formik.values.location} onChange={formik.handleChange} />
+
+                <label>Age</label>
+                <input type="text" name="age" placeholder="age" value={formik.values.age} onChange={formik.handleChange} />
+
+                <label>Bio</label>
+                <input type="text" name="bio" placeholder="bio" value={formik.values.bio} onChange={formik.handleChange} />
+
+                <input type="submit" />
+            </form>
+        </div>
+    )
 }
-
-export default SignUpForm;
