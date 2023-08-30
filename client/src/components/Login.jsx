@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 
@@ -67,6 +68,13 @@ function Login({ onLogin, onLogout }) {
       )}
     </Formik>
   );
+=======
+import { useState } from "react";
+
+function Login({ onLogin }) {
+    const 
+    return null
+>>>>>>> aae3c38 (setting up the signup form)
 }
 
 export default Login;

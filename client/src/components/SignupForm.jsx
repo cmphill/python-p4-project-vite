@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -214,3 +215,14 @@ export default SignUpForm;
 =======
 export default SignUpForm;
 >>>>>>> rebuild
+=======
+import React, { useState } from "react";
+
+
+function SignUpForm ({onLogin}) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [age, setAge]
+}
+>>>>>>> aae3c38 (setting up the signup form)

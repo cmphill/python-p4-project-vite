@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import React from 'react';
+import {NavLink, Outlet} from 'react-router-dom';
+>>>>>>> aae3c38 (setting up the signup form)
 
 import {NavLink, Outlet} from 'react-router-dom';
 
