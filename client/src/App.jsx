@@ -1,5 +1,5 @@
 import './App.css';
-import { SignupForm } from './components/Signup';
+import { SignupForm } from './components/SignupForm';
 import {createBrowserRouter, Route, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
 import Community from './components/Community.jsx';
@@ -18,10 +18,6 @@ function App() {
       path="/"
       element={<Layout />}
       >
-      <Route
-      path="/"
-      element={<Layout />}
-      >
         <Route index element={<Home />} />
         <Route path="login" element={<Login />}/>
         <Route path="signup" element={<SignupForm />} />
@@ -31,8 +27,7 @@ function App() {
         <Route path="personal" element={<Personal />} />
 
       </Route>
-      
-  )
+    )
   )
   return (
     <div >

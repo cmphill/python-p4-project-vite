@@ -2,13 +2,6 @@
     width: 100%;
     height: 50px;
     background-color: black;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d18612d (troubleshooting)
-=======
->>>>>>> rebuild
     color: white;
 }
 
@@ -25,13 +18,4 @@
 .menu ul li{
     list-style-type: none;
     padding-right: 10px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    font-;
->>>>>>> d988350 (added the menu and some addl routing)
-=======
->>>>>>> d18612d (troubleshooting)
-=======
->>>>>>> rebuild
 }
