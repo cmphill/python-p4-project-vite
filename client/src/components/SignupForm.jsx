@@ -106,7 +106,7 @@ function SignUpForm({onLogin}) {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = (values ) => {
     setErrors([]);
     setIsLoading(true);
     fetch("/signup", {
@@ -132,12 +132,12 @@ function SignUpForm({onLogin}) {
   return (
     <Formik
       initialValues={{
-        username,
-        password,
-        passwordConfirmation,
-        location,
-        age,
-        bio
+        username: '',
+        password: '',
+        passwordConfirmation: '',
+        location: '',
+        age: '',
+        bio: '',
       }}
       onSubmit={handleSubmit}
     >
