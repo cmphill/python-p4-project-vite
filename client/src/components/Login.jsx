@@ -31,7 +31,7 @@ export default function Login({ onLogin }) {
             navigate('/')
           }
           else {
-            res.json().then(errors => setError(errors.message))
+             Error('invalid credentials')
           }
         })
         
