@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 
-function SignUpForm() {
+function SignUpForm({onLogin}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -48,8 +48,6 @@ function SignUpForm() {
     >
       {({
         values,
-        errors,
-        touched,
         isSubmitting,
         handleChange,
         handleBlur,
@@ -107,6 +105,7 @@ function SignUpForm() {
           <button
             type="submit"
             disabled={isSubmitting}
+            onClick={handleSubmit}
           >
             {isSubmitting ? "Loading" : "Sign up"}
           </button>

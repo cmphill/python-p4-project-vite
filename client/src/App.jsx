@@ -38,7 +38,7 @@ function App() {
       >
         <Route index element={<Home />} />
         <Route path="login" element={<Login onLogin={handleLogin} onLogout={handleLogout}/>}/>
-        <Route path="signup" element={<SignUpForm/>} />
+        <Route path="signup" element={<SignUpForm onLogin={handleLogin}/>} />
         <Route path="community" element={<Community/>} />
         <Route path="personal" element={<Personal/>} />
 
