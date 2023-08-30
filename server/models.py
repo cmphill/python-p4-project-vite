@@ -114,6 +114,15 @@ class TripComment(db.Model, SerializerMixin):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    @validates("content")
+    def validate_content(self, key, value):
+        if len(value) < 0 and len(value) > 500:
+            raise ValueError("Content must be between 0 and 500 characters")
+        return value
+
+>>>>>>> 2ce00c6 (all validations fixed and seed.py is updated)
     serialize_rules = ("-users.trip_comments", "-trips.trip_comments","-users.signups", "-trips.signups",)
 =======
 =======
