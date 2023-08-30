@@ -1,72 +1,56 @@
-import React, { useState } from "react";
-import { Formik, Form, Field } from "formik";
+import { useState, } from "react";
+import { useFormik} from "formik";
+import { useNavigate } from "react-router-dom"
+import * as yup from 'yup';
 
-function Login({ onLogin, onLogout }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (values) => {
-    setIsLoading(true);
-    fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
+export default function Login({ onLogin }) {
+    const navigate = useNavigate()
+    
+    const formSchema = yup.object().shape({
+      username: yup.string().max(16, "Must be 16 characters or less").required("Must enter a username"),
+      password: yup.string().max(20, "Must be 20 characters or less").required("Must enter a password"),
+    })
+    const formik = useFormik({
+      initialValues: {
+        username: "",
+        password: "",
       },
-      body: JSON.stringify({
-        username: values.username,
-        password: values.password
-      })
-    }).then((r) => {
-      setIsLoading(false);
-      if (r.ok) {
-        r.json().then((user) => onLogin(user))
-      } else {
-        r.json().then((err) => setErrors(err.errors))
+      validationSchema: formSchema,
+      onSubmit: (values) => {
+        console.log(values)
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(values, null, 2),
+        }).then(res => {
+          if(res.ok) {
+            res.json().then(user => onLogin(user))
+            navigate('/')
+          }
+          else {
+            res.json().then(errors => setError(errors.message))
+          }
+        })
+        
       }
     })
-  };
-
-  return (
-    <Formik
-      initialValues={{
-        username: username,
-        password: password
-      }}
-      onSubmit={handleSubmit}
-    >
-      {({ values, errors, touched }) => (
-        <Form>
-          <Field
-            name="username"
-            label="Username"
-            placeholder="Enter your username"
-            value={values.username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Field
-            name="password"
-            type="password"
-            label="Password"
-            placeholder="Enter your password"
-            value={values.password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button disabled={isLoading}>
-            {isLoading ? "Loading..." : "Login"}
-          </button>
-          {errors.length > 0 && (
-            <div>
-              {errors.map((error, index) => (
-                <p key={index}>{error}</p>
-              ))}
-            </div>
-          )}
-        </Form>
-      )}
-    </Formik>
-  );
+    const errors = formik.errors;
+    const arrayErrors = Array.from(errors)
+    return (
+        <div className="login-container">
+            <form onSubmit={formik.handleSubmit}>
+                {arrayErrors.map(error => (
+                  <h3 style = {{color: "red"}} key={error}>{error.toUpperCase}</h3>
+                ))}
+                <label>Username</label>
+                <input type="text" id='username' name="username" value={formik.values.username} onChange={formik.handleChange} />
+                <label>Password</label>
+                <input type="password" id='password' name="password" value={formik.values.password} onChange={formik.handleChange} />
+                <input type="submit" id='submit' value="Login" />
+            </form>
+        </div>
+    )
 }
-
-export default Login;
