@@ -84,8 +84,12 @@ function SignUpForm ({onLogin}) {
 import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 
+<<<<<<< HEAD
 function SignUpForm() {
 >>>>>>> 93cae28 (formik)
+=======
+function SignUpForm({onLogin}) {
+>>>>>>> d679189 (added logo)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -139,8 +143,6 @@ function SignUpForm() {
     >
       {({
         values,
-        errors,
-        touched,
         isSubmitting,
         handleChange,
         handleBlur,
@@ -198,6 +200,7 @@ function SignUpForm() {
           <button
             type="submit"
             disabled={isSubmitting}
+            onClick={handleSubmit}
           >
             {isSubmitting ? "Loading" : "Sign up"}
           </button>

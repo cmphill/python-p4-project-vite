@@ -3,7 +3,6 @@ import {NavLink, Outlet} from 'react-router-dom';
 
 
 function Layout() {
-    console.log('hello')
 
     return( 
     
@@ -11,7 +10,7 @@ function Layout() {
         <header>
         <div className="NavBar">
           <nav>
-            {/* <img src='./assets/logo.png'/> */}
+            <img src='./src/assets/Triply_logo.png' width={100}/>
             <NavLink to="/">Home</NavLink>
             <NavLink to="community"> Community </NavLink>
             <NavLink to="personal"> Personal </NavLink>
