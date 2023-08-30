@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -7,52 +8,46 @@ export const SignupForm = () => {
   const [refreshPage, setRefreshPage] = useState(false);
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
+=======
+import { useState } from "react";
+import { Formik, Form, Field } from "formik";
+>>>>>>> rebuild
 
-  useEffect(() => {
-    console.log("FETCH! ");
-    fetch("/customers")
-      .then((res) => res.json())
-      .then((data) => {
-        setCustomers(data);
-        console.log(data);
-      });
-  }, [refreshPage]);
+function SignUpForm({onLogin}) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [location, setLocation] = useState("");
+  const [age, setAge] = useState("");
+  const [bio, setBio] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const formSchema = yup.object().shape({
-    email: yup.string().email("Invalid email").required("Must enter email"),
-    name: yup.string().required("Must enter a name").max(15),
-    age: yup
-      .number()
-      .positive()
-      .integer()
-      .required("Must enter age")
-      .typeError("Please enter an Integer")
-      .max(125),
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      age: "",
-    },
-    validationSchema: formSchema,
-    onSubmit: (values) => {
-      fetch("customers", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values, null, 2),
-      }).then((res) => {
-        if (res.status == 200) {
-          setRefreshPage(!refreshPage);
+  const handleSubmit = (values ) => {
+    setErrors([]);
+    setIsLoading(true);
+    fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    })
+      .then((response) => {
+        setIsLoading(false);
+        if (response.ok) {
+          response.json().then((user) => onLogin(user));
+        } else {
+          response.json().then((err) => setErrors(err.errors));
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    },
-  });
+  };
 
   return (
+<<<<<<< HEAD
     <div>
       <h1>Customer sign up form</h1>
       <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
@@ -130,6 +125,8 @@ function SignUpForm({onLogin}) {
   };
 
   return (
+=======
+>>>>>>> rebuild
     <Formik
       initialValues={{
         username: '',
@@ -211,5 +208,9 @@ function SignUpForm({onLogin}) {
   );
 }
 
+<<<<<<< HEAD
 export default SignUpForm;
 >>>>>>> d988350 (added the menu and some addl routing)
+=======
+export default SignUpForm;
+>>>>>>> rebuild

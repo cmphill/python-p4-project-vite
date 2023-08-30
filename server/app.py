@@ -54,6 +54,7 @@ class Users(Resource):
         else:
             return {'error': 'Could not create new user'}, 422
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 class UserById(Resource):
     def get(self, id):
@@ -87,6 +88,8 @@ class UserById(Resource):
             return {'error': 'Could not find user'}, 404
 =======
 >>>>>>> e45de08 (entirety of backend)
+=======
+>>>>>>> rebuild
 
 class UserById(Resource):
     def get(self, id):

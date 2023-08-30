@@ -13,6 +13,7 @@
         "@formfield/react": "^1.0.0-alpha.21",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "formik": "^2.4.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -26,6 +27,12 @@
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.15.0"
 >>>>>>> d18612d (troubleshooting)
+=======
+        "formik": "^2.4.3",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.15.0"
+>>>>>>> rebuild
     },
     "devDependencies": {
         "@types/react": "^18.2.15",
