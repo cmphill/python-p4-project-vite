@@ -49,7 +49,6 @@ function SignUpForm() {
     >
       {({
         values,
-        errors,
         isSubmitting,
         handleChange,
         handleBlur,
@@ -58,7 +57,7 @@ function SignUpForm() {
         <Form>
           <Field
             name="username"
-            label="Username"
+            placeholder="Username"
             type="text"
             value={values.username}
             onChange={handleChange}
@@ -66,7 +65,7 @@ function SignUpForm() {
           />
           <Field
             name="password"
-            label="Password"
+            placeholder="Password"
             type="password"
             value={values.password}
             onChange={handleChange}
@@ -74,7 +73,7 @@ function SignUpForm() {
           />
           <Field
             name="passwordConfirmation"
-            label="Password Confirmation"
+            placeholder="Password Confirmation"
             type="password"
             value={values.passwordConfirmation}
             onChange={handleChange}
@@ -82,7 +81,7 @@ function SignUpForm() {
           />
           <Field
             name="location"
-            label="Location"
+            placeholder="Location"
             type="text"
             value={values.location}
             onChange={handleChange}
@@ -90,7 +89,7 @@ function SignUpForm() {
           />
           <Field
             name="age"
-            label="Age"
+            placeholder="Age"
             type="number"
             value={values.age}
             onChange={handleChange}
@@ -98,7 +97,7 @@ function SignUpForm() {
           />
           <Field
             name="bio"
-            label="Bio"
+            placeholder="Bio"
             type="text"
             value={values.bio}
             onChange={handleChange}
@@ -110,9 +109,7 @@ function SignUpForm() {
           >
             {isSubmitting ? "Loading" : "Sign up"}
           </button>
-          {/* {errors.map((error, index) => (
-            <p key={index}>{error}</p>
-          ))} */}
+  
         </Form>
       )}
     </Formik>

@@ -53,9 +53,9 @@ function Login({ onLogin, onLogout }) {
             value={values.password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <SubmitButton disabled={isLoading}>
+          <button disabled={isLoading}>
             {isLoading ? "Loading..." : "Login"}
-          </SubmitButton>
+          </button>
           {errors.length > 0 && (
             <div>
               {errors.map((error, index) => (
