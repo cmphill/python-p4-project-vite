@@ -19,12 +19,10 @@ function App() {
       element={<Layout />}
       >
         <Route index element={<Home />} />
-        <Route path="login" element={<Login />}/>
-        <Route path="signup" element={<SignupForm />} />
-        <Route path="login" element={<Login />}/>
-        <Route path="signup" element={<SignupForm />} />
-        <Route path="community" element={<Community />} />
-        <Route path="personal" element={<Personal />} />
+        <Route path="login" element={<Login onLogin={handleLogin} onLogout={handleLogout}/>}/>
+        <Route path="signup" element={<SignUpForm/>} />
+        <Route path="community" element={<Community/>} />
+        <Route path="personal" element={<Personal/>} />
 
       </Route>
     )
