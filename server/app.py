@@ -19,7 +19,7 @@ api = Api(app)
 @app.before_request
 def check_if_logged_in():
     open_access_list=[
-        "login", "logout", "check_session", "communitycomments","tripById", 
+        "login", "logout", "check_session", "communitycomments","tripById", "users"
 
     ]
 
@@ -42,15 +42,16 @@ class Users(Resource):
         age = data["age"]
         location = data["location"]
         personal_bio = data["bio"]
+        image_url = data["image_url"]
 
-        if username and password == password_confirmation and age and location and personal_bio:
-            newUser = User(username=username, age=age,location=location,personal_bio=personal_bio)
+        if username and password == password_confirmation and age and location:
+            newUser = User(username=username, age=int(age),location=location,personal_bio=(personal_bio if personal_bio else ""), image_url=image_url, distance_traveled=0)
             newUser.password_hash = password
             db.session.add(newUser)
             db.session.commit()
             session["user_id"] = newUser.id
 
-            return newUser.to_dict(rules=('-_password_hash')), 201
+            return newUser.to_dict(rules=('-_password_hash',)), 201
         else:
             return {'error': 'Could not create new user'}, 422
 

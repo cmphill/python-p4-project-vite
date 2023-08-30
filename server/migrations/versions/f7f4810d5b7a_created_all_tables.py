@@ -1,8 +1,8 @@
 """created all tables
 
-Revision ID: 6c5243dd6188
+Revision ID: f7f4810d5b7a
 Revises: d79b179a12e6
-Create Date: 2023-08-30 14:01:35.265802
+Create Date: 2023-08-30 16:11:48.916631
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6c5243dd6188'
+revision = 'f7f4810d5b7a'
 down_revision = 'd79b179a12e6'
 branch_labels = None
 depends_on = None
@@ -29,12 +29,12 @@ def upgrade():
     sa.Column('time_end', sa.DateTime(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_trips'))
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(), nullable=False),
-    sa.Column('_password_hash', sa.String(), nullable=False),
+    sa.Column('_password_hash', sa.String(), nullable=True),
     sa.Column('image_url', sa.String(), nullable=False),
     sa.Column('age', sa.Integer(), nullable=False),
     sa.Column('location', sa.String(), nullable=False),
@@ -42,8 +42,8 @@ def upgrade():
     sa.Column('personal_bio', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('username')
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_users')),
+    sa.UniqueConstraint('username', name=op.f('uq_users_username'))
     )
     op.create_table('community_comments',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -52,7 +52,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], name=op.f('fk_community_comments_user_id_users')),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_community_comments'))
     )
     op.create_table('signups',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -62,7 +62,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['trip_id'], ['trips.id'], name=op.f('fk_signups_trip_id_trips')),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], name=op.f('fk_signups_user_id_users')),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_signups'))
     )
     op.create_table('trip_comments',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -73,7 +73,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['trip_id'], ['trips.id'], name=op.f('fk_trip_comments_trip_id_trips')),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], name=op.f('fk_trip_comments_user_id_users')),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_trip_comments'))
     )
     # ### end Alembic commands ###
 

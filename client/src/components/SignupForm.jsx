@@ -13,7 +13,8 @@ export default function SignUpForm({addUser}) {
         password_confirmation: yup.string().max(20, "Must be 20 characters or less").required("Must enter a password confirmation"),
         age: yup.number().required("Must enter an age number"),
         location: yup.string().required("Must enter a location"),
-        bio: yup.string().max(500, "Bio must be less than 500 characters")
+        bio: yup.string().max(500, "Bio must be less than 500 characters"),
+        image_url: yup.string().required("Must enter an image URL")
     })
 
     const formik = useFormik({
@@ -24,10 +25,12 @@ export default function SignUpForm({addUser}) {
             age: '',
             location: '',
             bio: '',
+            image_url: '',
         },
         validationSchema: formSchema,         
         onSubmit: (values) => {
-            fetch("/users", {
+            console.log("fetching post");
+            fetch("/api/users", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -40,7 +43,11 @@ export default function SignUpForm({addUser}) {
                     
                 }
                 else {
-                    res.json().then(errors => setError(errors.message))
+                    res.json().then(errors => {
+                        console.log("here is the error");
+                        setError(errors.message)
+                        console.log(errors);
+                    })
                 }
             })
         }
@@ -70,6 +77,9 @@ export default function SignUpForm({addUser}) {
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Bio</label>
                 <input className="pr-60 border-b-2 border-black" type="text" name="bio" placeholder="bio" value={formik.values.bio} onChange={formik.handleChange} />
+
+                <label className="pr-60 border-b-2 border-red-500 font-bold">Image_url</label>
+                <input className="pr-60 border-b-2 border-black" type="text" name="image_url" placeholder="image url" value={formik.values.image_url} onChange={formik.handleChange} />
 
                 <input className="border-black border-2 rounded-md" type="submit" />
 
