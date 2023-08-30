@@ -118,13 +118,6 @@ class TripComment(db.Model, SerializerMixin):
             raise ValueError("Content must be between 0 and 500 characters")
         return value
 
-    serialize_rules = ("-users.trip_comments", "-trips.trip_comments","-users.signups", "-trips.signups",)
-    @validates("content")
-    def validate_content(self, key, value):
-        if len(value) < 0 and len(value) > 500:
-            raise ValueError("Content must be between 0 and 500 characters")
-        return value
-
     serialize_rules = ("-users.trip_comments", "-trips","-users.signups","-users._password_hash","-users.community_comments",)
 
 class CommunityComment(db.Model, SerializerMixin):
