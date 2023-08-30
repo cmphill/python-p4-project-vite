@@ -1,8 +1,13 @@
 
+<<<<<<< HEAD
 import {NavLink, Outlet} from 'react-router-dom';
 
 
 function Layout() {
+=======
+function Layout() {
+    console.log('hello')
+>>>>>>> 1024863 (layout file)
 
     return( 
     
