@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
 
-function SignupForm ({onLogin}) {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [passwordConfirmation, setPasswordConfirmation] = useState("");
+function SignUpForm ({onLogin}) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [age, setAge]
 }
 
-export default SignupForm;
+export default SignUpForm;
