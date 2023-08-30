@@ -15,6 +15,7 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
+    image_url = db.Column(db.String, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     location = db.Column(db.String, nullable=False)
     distance_traveled = db.Column(db.Float, nullable=False)
@@ -28,9 +29,15 @@ class User(db.Model, SerializerMixin):
 
     @validates("username")
     def validate_username(self, key, value):
-        usernames = User.query.with_entities(User.username).all()
+        usernames = User.query.all()
         if not value and value in usernames:
             raise ValueError("Username must be unique")
+        return value
+    
+    @validates("image_url")
+    def validates_image_url(self, key, value):
+        if not value:
+            raise ValueError("Image URL must be provided")
         return value
 
     @validates("personal_bio")
@@ -44,6 +51,13 @@ class User(db.Model, SerializerMixin):
         if value < 0 and value > 100:
             raise ValueError("Age must be between 0 and 100")
         return value
+    
+    @validates("location")
+    def validates_location(self, key, value):
+        if not value:
+            raise ValueError("Location must be provided")
+        return value
+    
 
     serialize_rules = ("-signups.users", "-trip_comments.users", "-community_comments.users",)
     @hybrid_property
@@ -58,12 +72,6 @@ class User(db.Model, SerializerMixin):
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password.encode("utf-8"))
 
-    @validates("username")
-    def validate_username(self, key, value):
-        usernames = User.query.with_entities(User.username).all()
-        if not value and value in usernames:
-            raise ValueError("Username must be unique")
-        return value
 
 
 class Trip(db.Model, SerializerMixin):
@@ -87,6 +95,24 @@ class Trip(db.Model, SerializerMixin):
     def validate_description(self, key, value):
         if len(value) < 0 and len(value) > 1500:
             raise ValueError("Description must be between 0 and 1500 characters")
+        return value
+    
+    @validates("location")
+    def validates_location(self, key, value):
+        if not value:
+            raise ValueError("Location must be provided")
+        return value
+    
+    @validates("time_start")
+    def validates_time_start(self, key, value):
+        if not value:
+            raise ValueError("Time_Start must be provided")
+        return value
+
+    @validates("name")
+    def validates_name(self, key, value):
+        if not value:
+            raise ValueError("Name must be provided")
         return value
 
     serialize_rules = ("-signups.trips","-trip_comments.trips",)

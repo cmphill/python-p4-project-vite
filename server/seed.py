@@ -37,6 +37,7 @@ if __name__ == '__main__':
                 location = fake.city(),
                 distance_traveled = random.uniform(10, 1000),
                 personal_bio = fake.text(max_nb_chars=100),
+                image_url = fake.image_url(480,480)
             )
             user.password_hash = fake.password()
             db.session.add(user)
