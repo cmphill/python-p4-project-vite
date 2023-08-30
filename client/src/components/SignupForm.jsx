@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Formik, Form, Field } from "formik";
+import * as Yup from 'yup';
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -11,7 +12,7 @@ function SignUpForm() {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = (values) => {
     setErrors([]);
     setIsLoading(true);
     fetch("/signup", {
@@ -49,7 +50,6 @@ function SignUpForm() {
       {({
         values,
         errors,
-        touched,
         isSubmitting,
         handleChange,
         handleBlur,
@@ -110,9 +110,9 @@ function SignUpForm() {
           >
             {isSubmitting ? "Loading" : "Sign up"}
           </button>
-          {errors.map((error, index) => (
+          {/* {errors.map((error, index) => (
             <p key={index}>{error}</p>
-          ))}
+          ))} */}
         </Form>
       )}
     </Formik>
