@@ -5,7 +5,7 @@
 # Remote library imports
 from flask import request, make_response, session
 from flask_restful import Resource, Api
-
+from datetime import datetime
 # Local imports
 from config import app, api, db
 
@@ -19,12 +19,13 @@ api = Api(app)
 @app.before_request
 def check_if_logged_in():
     open_access_list=[
-        "login", "logout", "check_session", "communitycomments","tripById", "users"
-
+        "login", "logout", "check_session", "communitycomments","tripbyid", "users", "userbyid", "trips"
     ]
 
     if (request.endpoint) not in open_access_list and (not session.get("user_id")):
-        return {"error": "401 Unauthorized"}, 401
+        return {"error": "app before req 401 Unauthorized"}, 401
+    # else: 
+    #     return {"message" : session.get("user_id")}, 200
 
 class Index(Resource):
     def get(self):
@@ -137,6 +138,39 @@ class Trips(Resource):
     def get(self):
         trips = [t.to_dict() for t in Trip.query.all()]
         return trips, 200
+    def post(self):
+        data = request.get_json()
+        name = data['name']
+        decsription = data['description']
+        location = data['location']
+        distance = data['distance']
+        time_start = data['time_start']
+        time_end = data['time_end']
+        image_url = data['image_url']
+        owner_id = session.get("user_id")
+        
+
+        if image_url and owner_id and name and decsription and time_start and time_end and location and distance:
+            newTrip = Trip(
+                name = name,
+                description = decsription,
+                owner_id = owner_id,
+                location = location,
+                distance = int(distance),
+                time_start = datetime.strptime(time_start, "%Y-%m-%d %H:%M:%S.%f"),
+                time_end = datetime.strptime(time_end, "%Y-%m-%d %H:%M:%S.%f"),
+                image_url = image_url
+            )
+            db.session.add(newTrip)
+            db.session.commit()
+
+            newSignup = Signup(user_id = owner_id, trip_id = newTrip.id)
+
+            db.session.add(newSignup)
+            db.session.commit()
+
+            return newTrip.to_dict(), 201
+
 
 class TripById(Resource):
     def get(self, id):
@@ -269,13 +303,13 @@ api.add_resource(Index, '/', endpoint="index")
 api.add_resource(Users, '/users', endpoint="users") # THIS IS WHERE USER SIGNUP TOO
 api.add_resource(UserById, '/users/<int:id>', endpoint="userById")
 api.add_resource(Trips, '/trips', endpoint="trips")
-api.add_resource(TripById, '/trips/<int:id>', endpoint="tripById")
+api.add_resource(TripById, '/trips/<int:id>', endpoint="tripbyid")
 api.add_resource(Signups, '/signups', endpoint="signups")
-api.add_resource(SignupById, '/signups/<int:id>', endpoint="signupById")
+api.add_resource(SignupById, '/signups/<int:id>', endpoint="signupbyid")
 api.add_resource(TripComments, '/tripcomments', endpoint="tripcomments")
-api.add_resource(TripCommentById, "/tripcomments/<int:id>", endpoint="tripcommentById")
+api.add_resource(TripCommentById, "/tripcomments/<int:id>", endpoint="tripcommentbyid")
 api.add_resource(CommunityComments, '/communitycomments', endpoint="communitycomments")
-api.add_resource(CommunityCommentById, '/communitycomments/<int:id>', endpoint="communitycommentById")
+api.add_resource(CommunityCommentById, '/communitycomments/<int:id>', endpoint="communitycommentbyid")
 api.add_resource(CheckSessions, "/check_session", endpoint="check_session")
 api.add_resource(Login, "/login", endpoint="login")
 api.add_resource(Logout, "/logout", endpoint="logout")
