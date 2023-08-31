@@ -1,12 +1,21 @@
 import {useEffect, useState} from 'react';
 import CommunityCardList from './CommunityCardList';
 import CommunityComment from './CommunityComment';
-function Community() {
+function Community({
+    user,
+    user_id,
+    comments,
+    addComment,
+    deleteComment,
+    updateComment,
+}) {
+
     return (
         <div>
         <h1>testing</h1>
-        <CommunityCardList />
-        <CommunityComment />
+        <CommunityCardList comments={comments} deleteComment={deleteComment} updateComment={updateComment} user_id={user_id} />
+        <CommunityComment addComment={addComment} user_id={user_id} user={user} />
+        
         </div>
     );
 

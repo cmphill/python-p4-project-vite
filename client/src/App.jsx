@@ -19,7 +19,13 @@ import { tripLoader } from './components/TripMain';
 function App() {
 
     const [user, setUser] = useState(null)
+<<<<<<< HEAD
     const [comment, setComments] = useState(null)
+=======
+    const [trip, setTrip] = useState(null)
+    const [communityComments, setCommunityComments] = useState([])
+    const [tripComments, setTripComments] = useState([])
+>>>>>>> main
 
     useEffect( () => {
         fetch("/api/check_session").then(( response ) => {
@@ -32,12 +38,45 @@ function App() {
         })
     }, [])
 
+<<<<<<< HEAD
+=======
+    useEffect(() => {
+      fetch('/api/communitycomments').then((res) => {
+        if (res.ok) {
+          res.json().then((comcomments) => {
+            setCommunityComments(comcomments)
+          })
+        }
+      })
+    }, [])
+
+>>>>>>> main
 
     function handleLogin(user) {
         setUser(user);
     }
     function handleLogout() {
         setUser(null);
+    }
+
+    function addCommunityComment(new_comment) {
+        setCommunityComments([...communityComments, new_comment])
+    }
+
+    function handleDeleteCommunityComment(id) {
+      const updatedComments = communityComments.filter((comment) => comment.id !== id)
+      setMessages(updatedMessages)
+    }
+
+    function handleUpdateCommunityComment(id, new_text) {
+      const updated_comment = communityComments.map((comment) => {
+        if (comment.id === id) {
+          return new_text
+        } else {
+          return comment
+        }
+      })
+      setCommunityComments(updated_comment)
     }
 
 
@@ -51,8 +90,21 @@ function App() {
             <Route path="login" element={<Login onLogin={handleLogin}/>}/>
             <Route path="signup" element={<SignUpForm onSignup={handleLogin}/>} />
             <Route path="community" element={<CommunityLayout/>}>
+<<<<<<< HEAD
                 <Route path="trip-posts" loader={tripLoader} element={<TripMain />} />
                 <Route path="community-posts" element={<Community/>} />
+=======
+                <Route path="trip-posts" element={<TripComment/>} />
+                <Route path="community-posts" element={<Community 
+                comments={communityComments}
+                addComment={addCommunityComment}
+                deleteComment={handleDeleteCommunityComment}
+                updateComment={handleUpdateCommunityComment}
+                user_id={user ? user.id : null}
+                user={user}
+
+                />} />
+>>>>>>> main
             </Route>
             <Route path="personal" element={<Personal user={user}/>} />
 
