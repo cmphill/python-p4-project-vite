@@ -38,7 +38,7 @@ export default function SignUpForm({onSignup}) {
                 body : JSON.stringify(values, null, 2),
             }).then( res => {
                 if(res.ok) {
-                    // res.json().then(user => onSignup(user))
+                    res.json().then(user => onSignup(user))
                     console.log("signed up in successfully");
                     navigate('/')
                 }

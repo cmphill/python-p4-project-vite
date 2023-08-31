@@ -16,13 +16,15 @@ function App() {
     const [user, setUser] = useState(null)
 
     useEffect( () => {
-        fetch("/check_sesion").then(( response ) => {
+        fetch("/api/check_session").then(( response ) => {
             if (response.ok) {
-                response.json().then( (user) => set(user));
+                response.json().then( (user) => {
+                    // console.log(user)
+                    setUser(user)
+                });;
             }
-        
         })
-    }, [user])
+    }, [])
     
     function handleLogin(user) {
         setUser(user);
@@ -36,11 +38,11 @@ function App() {
         createRoutesFromElements(
         <Route
         path="/"
-        element={<Layout user={user}/>}
+        element={<Layout onLogout={handleLogout} user={user}/>}
         >
             <Route index element={<Home />} />
-            <Route path="login" element={<Login onLogin={handleLogin} onLogout={handleLogout}/>}/>
-            <Route path="signup" element={<SignUpForm />} />
+            <Route path="login" element={<Login onLogin={handleLogin}/>}/>
+            <Route path="signup" element={<SignUpForm onSignup={handleLogin}/>} />
             <Route path="community" element={<Community/>} />
             <Route path="personal" element={<Personal/>} />
 

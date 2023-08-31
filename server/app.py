@@ -254,7 +254,7 @@ class Login(Resource):
         user = User.query.filter_by(username=username).first()
         if user.authenticate(password):
             session["user_id"] = user.id
-            return user.to_dict(), 200
+            return user.to_dict(rules=("-password_hash",)), 200
         return {"error": "401 Unautorized"}, 401
     
 class Logout(Resource):

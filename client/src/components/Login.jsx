@@ -19,7 +19,7 @@ export default function Login({ onLogin }) {
       validationSchema: formSchema,
       onSubmit: (values) => {
         console.log(values)
-        fetch('/login', {
+        fetch('/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
