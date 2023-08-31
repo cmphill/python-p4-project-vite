@@ -3,7 +3,7 @@ import { useFormik} from "formik";
 import { useNavigate } from "react-router-dom"
 import * as yup from 'yup';
 
-export default function SignUpForm({addUser}) {
+export default function SignUpForm({onSignup}) {
     const navigate = useNavigate();
     const [errors, setError] = useState()
 
@@ -38,8 +38,9 @@ export default function SignUpForm({addUser}) {
                 body : JSON.stringify(values, null, 2),
             }).then( res => {
                 if(res.ok) {
-                    res.json().then(user => addUser(user))
-                    navigate('/')
+                    res.json().then(user => onSignup(user))
+                    console.log("signed up in successfully");
+                    navigate('../personal')
                 }
                 else {
                     res.json().then(errors => {

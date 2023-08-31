@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup"
 
-export default function createTripMessage({ user }) {
+
+export default function CreateTripComment({ user, trip }) {
     const [body, setBody] = useState("")
     const [errors, setErrors] = useState({})
 
@@ -13,6 +14,8 @@ export default function createTripMessage({ user }) {
     const formik = useFormik({
         initialValues: {
             content: "",
+            user_id: user.id,
+            trip_id: trip.trip_id
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
@@ -39,7 +42,16 @@ export default function createTripMessage({ user }) {
         }
     })
     return (
-        <div className="TripComment"></div>
+        <div className="TripComment">
+            <form onSubmit={formik.handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="content">Content</label>
+                    <textarea className="form-control" id="content" rows="3" onChange={formik.handleChange} value={formik.values.content}></textarea>
+                    {formik.errors.content && formik.touched.content && <div className="error">{formik.errors.content}</div>}
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+        </div>
     )
 
 }

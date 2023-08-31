@@ -19,7 +19,7 @@ export default function Login({ onLogin }) {
       validationSchema: formSchema,
       onSubmit: (values) => {
         console.log(values)
-        fetch('/login', {
+        fetch('/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ export default function Login({ onLogin }) {
         }).then(res => {
           if(res.ok) {
             res.json().then(user => onLogin(user))
-            navigate('/')
+            navigate('../personal')
           }
           else {
              Error('invalid credentials')
