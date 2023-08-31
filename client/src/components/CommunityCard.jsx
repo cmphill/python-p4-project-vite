@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import EditCommunityComment from ''
 
 function CommunityCard({
     comment,
@@ -13,6 +14,7 @@ function CommunityCard({
         
     function handleUpdateComment(updatedComment) {
         if (user_id === comment.user_id) {
+            <EditCommunityComment updateComment={updateComment} id={comment.id} content={content} updated_at={updated_at}/>
             updateComment(updatedComment)
         }
         else {
@@ -38,8 +40,8 @@ function CommunityCard({
             <span className='user'>{username}</span>
             <span className='created_at'>{created_at}</span>
             <p>{content}</p>
-            <button>Delete</button>
-            <button>Update</button>
+            <button onClick={handleDeleteComment}>Delete</button>
+            <button onClick={handleUpdateComment}>Update</button>
         </div>
     )
 }
