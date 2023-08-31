@@ -8,7 +8,9 @@ import Personal from './components/Personal.jsx';
 import Login from './components/Login.jsx';
 import SignUpForm from './components/SignupForm';
 import Layout from "./components/Layout";
-import CommunityLayout from "./components/CommunityLayout";
+import Community from './components/Community';
+import CommunityLayout from './components/CommunityLayout';
+
 
 
 
@@ -48,7 +50,7 @@ function App() {
             <Route path="signup" element={<SignUpForm onSignup={handleLogin}/>} />
             <Route path="community" element={<CommunityLayout/>}>
                 <Route path="trip-posts" element={<TripComment/>} />
-                <Route path="community-posts" element={<CommunityComment/>} />
+                <Route path="community-posts" element={<Community/>} />
             </Route>
             <Route path="personal" element={<Personal user={user}/>} />
 

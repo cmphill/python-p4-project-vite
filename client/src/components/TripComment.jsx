@@ -1,90 +1,56 @@
-import { useState } from "react";
+import { useState } from 'react'
 import { useFormik } from "formik";
-import * as yup from "yup"
+import * as yup from "yup";
 
-export default function createTripMessage({ user }) {
-    const [body, setBody] = useState("")
-    const [errors, setErrors] = useState({})
+function TripComment({ user }) {
+  const [comment, setComment] = useState("");
+  const [errors, setErrors] = useState({})
 
-    const formSchema = yup.object().shape({
-        content: yup.string().min(1, "Must contain text").max(500, "May not exceed 500 characters").required("Required"),
-    })
+  const formSchema = yup.object().shape({
+    comment: yup.string().max(500, 'maxium 500 characters').required("Must enter a comment"),
+  });
 
-    const formik = useFormik({
-        initialValues: {
-            content: "",
+  const formik = useFormik({
+    initialValues: {
+      comment: '',
+    },
+    validationSchema: formSchema,
+    onSubmit: (values) => {
+      fetch("/api/tripcomments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        validationSchema: formSchema,
-        onSubmit: (values) => {
-            console.log('posting comment:', values)
-            fetch('api/tripcomments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(values, null, 2),
-            }).then( res => {
-                if (res.ok) {
-                    res.json().then(post => setBody(post))
-                    }
-                
-                else {
-                    res.json().then(errors => {
-                        console.log('we\'ve sprung an error')
-                        setErrors(errors.message)
-                        console.log(errors)
-                     })
-                 }
-            })
+        body: JSON.stringify(values),
+      }).then(res => {
+        if (res.ok) {
+            res.json().then(data => setComment(data))
+            }
+        else {
+         res.json().then(errors => {
+            console.log('we\'ve got errors')
+            setErrors(errors.message)
+            console.log(errors)
+         })
         }
     })
-    return (
-        <div className="TripComment"></div>
-    )
+        
+    },
+  });
 
+
+  return (
+    <div className="TripComment">
+    <form onSubmit={formik.handleSubmit}>
+        <div className="form-group">
+            <label htmlFor="comment">Comment</label>
+            <textarea style={{resize: "none"}}className="rounded border-b-2 border-black" type="text" rows="3" name="comment" placeholder="comment" value={formik.values.comment} onChange={formik.handleChange} />
+            {formik.errors.content && formik.touched.content && <div className="error">{formik.errors.content}</div>}
+        </div>
+        <button type="submit" className="btn btn-primary">Submit</button>
+    </form>
+</div>
+  );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class TripComment(db.Model, SerializerMixin):
-//     __tablename__ = 'trip_comments'
-
-//     id = db.Column(db.Integer, primary_key=True)
-//     content = db.Column(db.String, nullable=False)
-//     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-//     trip_id = db.Column(db.Integer, db.ForeignKey('trips.id'))
-//     created_at = db.Column(db.DateTime, server_default=db.func.now())
-//     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
-
-//     @validates("content")
-//     def validate_content(self, key, value):
-//         if len(value) < 0 and len(value) > 500:
-//             raise ValueError("Content must be between 0 and 500 characters")
-//         return value
-
-//     serialize_rules = ("-users.trip_comments", "-trips.trip_comments","-users.signups", "-trips.signups",)
-//     @validates("content")
-//     def validate_content(self, key, value):
-//         if len(value) < 0 and len(value) > 500:
-//             raise ValueError("Content must be between 0 and 500 characters")
-//         return value
-
-//     serialize_rules = ("-users.trip_comments", "-trips","-users.signups","-users._password_hash","-users.community_comments",)
-
-// api.add_resource(TripComments, '/tripcomments', endpoint="tripcomments")
-// api.add_resource(TripCommentById, "/tripcomments/<int:id>", endpoint="tripcommentById")
+export default TripComment;
