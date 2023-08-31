@@ -17,7 +17,6 @@ function Layout() {
                             <NavLink to="community"> Community </NavLink>
                             <NavLink to="personal"> Personal </NavLink>
                             <NavLink to="login"> Log In </NavLink>
-                            <NavLink to="signup"> Sign Up </NavLink>
                         </div>
                     </nav>
                 </div>

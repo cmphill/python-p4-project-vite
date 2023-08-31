@@ -1,10 +1,20 @@
 .header-container a:hover {
     color: var(--logo);
-    transition: 0.25s ease-in
+    transition: 0.25s ease-out
 }
 
 .header-container a {
     border-bottom: 3px var(--logo) solid;
     font-weight: 600;
     padding: 0.5rem
+}
+
+.btn:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+    transition: 0.25s ease-out
+}
+
+.btn-secondary:hover {
+    border-bottom: 2px var(--logo) solid;
 }
