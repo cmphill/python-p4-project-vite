@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function CommunityComment({ setComment }) {
+function CommunityComment({ addComment, user_id, user }) {
   
   const [errors, setErrors] = useState({})
 
@@ -16,15 +16,18 @@ function CommunityComment({ setComment }) {
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
-      fetch("/api/community-comments", {
+      fetch("/api/communitycomments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+            values,
+            user_id: user_id
+        }),
       }).then(res => {
         if (res.ok) {
-            res.json().then(values => setComment(values))
+            res.json().then(values => addComment(values))
             }
         else {
          res.json().then(errors => {

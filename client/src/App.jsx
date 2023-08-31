@@ -22,17 +22,6 @@ function App() {
     const [communityComments, setCommunityComments] = useState([])
     const [tripComments, setTripComments] = useState([])
 
-
-    useEffect(() => {
-      fetch('/api/communitycomments').then((res) => {
-        if (res.ok) {
-          res.json().then((comcomments) => {
-            setCommunityComments(comcomments)
-          })
-        }
-      })
-    })
-
     useEffect( () => {
         fetch("/api/check_session").then(( response ) => {
             if (response.ok) {
@@ -43,6 +32,17 @@ function App() {
             }
         })
     }, [])
+
+    useEffect(() => {
+      fetch('/api/communitycomments').then((res) => {
+        if (res.ok) {
+          res.json().then((comcomments) => {
+            setCommunityComments(comcomments)
+          })
+        }
+      })
+    }, [])
+
 
     function handleLogin(user) {
         setUser(user);
@@ -88,6 +88,8 @@ function App() {
                 addComment={addCommunityComment}
                 deleteComment={handleDeleteCommunityComment}
                 updateComment={handleUpdateCommunityComment}
+                user_id={user ? user.id : null}
+                user={user}
 
                 />} />
             </Route>
