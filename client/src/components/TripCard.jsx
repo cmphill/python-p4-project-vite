@@ -41,7 +41,7 @@ export default function TripCard({owner = null, data}) {
                 <p className="text-xs">{formatted_time_start}</p>
             </div>
             <div className="col-span-1 flex items-end justify-center">
-                <p className="text-xs">{" ----->"} </p>
+                <p className="text-xs">{"----->"} </p>
             </div>
             <div className="col-span-1 flex items-end justify-start">
                 <p className="text-xs">{formatted_time_end}</p>
