@@ -1,7 +1,7 @@
 import {NavLink, Outlet} from 'react-router-dom';
 
 
-function Layout() {
+function Layout({user}) {
 
         return( 
 
@@ -16,7 +16,7 @@ function Layout() {
                             <NavLink to="/">Home</NavLink>
                             <NavLink to="community"> Community </NavLink>
                             <NavLink to="personal"> Personal </NavLink>
-                            <NavLink to="login"> Log In </NavLink>
+                            {user ? <a>Log Out</a> : <NavLink to="login"> Log In </NavLink>}
                         </div>
                     </nav>
                 </div>

@@ -13,8 +13,17 @@ import Layout from "./components/Layout";
 
 function App() {
 
-    const [users, setUsers] = useState([])
+    const [user, setUser] = useState(null)
 
+    useEffect( () => {
+        fetch("/check_sesion").then(( response ) => {
+            if (response.ok) {
+                response.json().then( (user) => set(user));
+            }
+        
+        })
+    }, [user])
+    
     function handleLogin(user) {
         setUser(user);
     }
@@ -22,19 +31,16 @@ function App() {
         setUser(null);
     }
 
-    function addUser(user) {
-        setUsers(...users, user)
-    }
-    
+
     const router = createBrowserRouter(
         createRoutesFromElements(
         <Route
         path="/"
-        element={<Layout />}
+        element={<Layout user={user}/>}
         >
             <Route index element={<Home />} />
             <Route path="login" element={<Login onLogin={handleLogin} onLogout={handleLogout}/>}/>
-            <Route path="signup" element={<SignUpForm addUser={addUser}/>} />
+            <Route path="signup" element={<SignUpForm />} />
             <Route path="community" element={<Community/>} />
             <Route path="personal" element={<Personal/>} />
 
