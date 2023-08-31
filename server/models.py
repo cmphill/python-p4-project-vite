@@ -80,6 +80,7 @@ class Trip(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     owner_id = db.Column(db.Integer, nullable=False)
+    image_url = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
     location = db.Column(db.String, nullable=False)
     distance = db.Column(db.Float, nullable=False)
@@ -90,6 +91,12 @@ class Trip(db.Model, SerializerMixin):
 
     signups = db.relationship("Signup", cascade="all, delete-orphan", backref="trips")
     trip_comments = db.relationship("TripComment", cascade="all, delete-orphan", backref="trips")
+
+    @validates("image_url")
+    def validates_image_url(self, key, value):
+        if not value:
+            raise ValueError("Image URL must be provided")
+        return value
 
     @validates("description")
     def validate_description(self, key, value):

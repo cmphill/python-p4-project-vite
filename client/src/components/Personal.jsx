@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom"
+import TripCard from "./TripCard";
 
 function Personal({user}) {
 
+    console.log(user);
     if (!(user)) {
         return (
             <>
@@ -13,31 +15,32 @@ function Personal({user}) {
 
     return (
         <div className="flex mt-2 flex-col items-center">
-            <div className="grid grid-cols-5 grid-flow-row gap-4">
-                <div className="w-24 rounded-full relative bg-gray-400 col-span-2 row-span-3">
-                    <img className="image-center" src="http://placehold.it" alt="test"/>
+            <div className="grid-container">
+                <div className="rounded-full relative bg-gray-400 col-span-2 row-span-3">
+                    <img className="image-center " src="http://placehold.it" alt="test"/>
                 </div>
-                <div className="col-span-3 px-16">
-                    <p className="bg-gray-400">Name</p>
+                <div className="flex items-center justify-center border-2 col-span-3">
+                    <p className="">{user.username}</p>
                 </div>
-                <div className="col-span-3 px-16">
-                    <p className="bg-gray-400">location</p>
+                <div className="flex items-center justify-center border-2 col-span-3">
+                    <p className="">{user.location}</p>
                 </div>
-                <div className="col-span-3 px-16">
-                    <p className="bg-gray-400">distance_traveled</p>
+                <div className="flex items-center justify-center border-2 col-span-3">
+                    <p className="">{user.distance_traveled} miles traveled</p>
+                </div>
+                <div className="border-2 col-span-5 auto-rows-min">
+                    <h1 className="font-bold mx-6 my-3">Bio</h1>
+                    {/* <p className="text-justify mx-6 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est repudiandae amet suscipit mollitia. Officia quidem quaerat nesciunt earum officiis magni impedit corporis voluptas dicta harum dolorem voluptate dolore fugiat doloremque vero, at perferendis reprehenderit voluptatem quae? Omnis nemo unde magnam!</p> */}
+                    <p className="text-justify mx-6 mb-3">{user.personal_bio}</p>
+
                 </div>
                 <div className="col-span-5 auto-rows-min">
-                    <p className="bg-gray-400">Bio</p>
-                    <p className="bg-gray-400">Bio</p>
-                    <p className="bg-gray-400">Bio</p>
-                    <p className="bg-gray-400">Bio</p>
-                </div>
-                <div className="col-span-5 auto-rows-min">
-                    <p className="bg-gray-400">Trips</p>
-                    <p className="bg-gray-400 ">Trips</p>
-                    <p className="bg-gray-400 ">Trips</p>
-                    <p className="bg-gray-400 ">Trips</p>
-                    <p className="bg-gray-400 ">Trips</p>
+                    <h1 className="font-bold mx-6 my-3">Trips </h1>
+                    <TripCard />
+                    {/* <TripCard />
+                    <TripCard />
+                    <TripCard />
+                    <TripCard /> */}
                 </div>
             </div>
         </div>

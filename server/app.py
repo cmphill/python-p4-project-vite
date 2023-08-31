@@ -19,12 +19,14 @@ api = Api(app)
 @app.before_request
 def check_if_logged_in():
     open_access_list=[
-        "login", "logout", "check_session", "communitycomments","tripById", "users"
+        "login", "logout", "check_session", "communitycomments","tripbyid", "users", "userbyid",
 
     ]
 
     if (request.endpoint) not in open_access_list and (not session.get("user_id")):
-        return {"error": "401 Unauthorized"}, 401
+        return {"error": "app before req 401 Unauthorized"}, 401
+    # else: 
+    #     return {"message" : session.get("user_id")}, 200
 
 class Index(Resource):
     def get(self):
@@ -269,13 +271,13 @@ api.add_resource(Index, '/', endpoint="index")
 api.add_resource(Users, '/users', endpoint="users") # THIS IS WHERE USER SIGNUP TOO
 api.add_resource(UserById, '/users/<int:id>', endpoint="userById")
 api.add_resource(Trips, '/trips', endpoint="trips")
-api.add_resource(TripById, '/trips/<int:id>', endpoint="tripById")
+api.add_resource(TripById, '/trips/<int:id>', endpoint="tripbyid")
 api.add_resource(Signups, '/signups', endpoint="signups")
-api.add_resource(SignupById, '/signups/<int:id>', endpoint="signupById")
+api.add_resource(SignupById, '/signups/<int:id>', endpoint="signupbyid")
 api.add_resource(TripComments, '/tripcomments', endpoint="tripcomments")
-api.add_resource(TripCommentById, "/tripcomments/<int:id>", endpoint="tripcommentById")
+api.add_resource(TripCommentById, "/tripcomments/<int:id>", endpoint="tripcommentbyid")
 api.add_resource(CommunityComments, '/communitycomments', endpoint="communitycomments")
-api.add_resource(CommunityCommentById, '/communitycomments/<int:id>', endpoint="communitycommentById")
+api.add_resource(CommunityCommentById, '/communitycomments/<int:id>', endpoint="communitycommentbyid")
 api.add_resource(CheckSessions, "/check_session", endpoint="check_session")
 api.add_resource(Login, "/login", endpoint="login")
 api.add_resource(Logout, "/logout", endpoint="logout")

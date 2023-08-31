@@ -53,6 +53,7 @@ if __name__ == '__main__':
                 name = fake.name(),
                 owner_id = random.choice(users).id,
                 description = fake.text(max_nb_chars=100),
+                image_url = fake.image_url(480,480),
                 location = fake.city(),
                 distance = randint(10, 100),
                 time_start = tStart,
