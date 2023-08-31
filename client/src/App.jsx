@@ -1,7 +1,8 @@
 import './App.css';
 import {createBrowserRouter, Route, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
-import Community from './components/Community.jsx';
+import CommunityComment from './components/CommunityComment';
+import TripComment from './components/TripComment';
 import Home from './components/Home.jsx';
 import Personal from './components/Personal.jsx';
 import Login from './components/Login.jsx';
@@ -45,7 +46,10 @@ function App() {
             <Route index element={<Home />} />
             <Route path="login" element={<Login onLogin={handleLogin}/>}/>
             <Route path="signup" element={<SignUpForm onSignup={handleLogin}/>} />
-            <Route path="community" element={<CommunityLayout/>}/>
+            <Route path="community" element={<CommunityLayout/>}>
+                <Route path="trip-posts" element={<TripComment/>} />
+                <Route path="community-posts" element={<CommunityComment/>} />
+            </Route>
             <Route path="personal" element={<Personal user={user}/>} />
 
         </Route>
