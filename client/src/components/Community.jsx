@@ -12,7 +12,6 @@ function Community({
 
     return (
         <div>
-        <h1>testing</h1>
         <CommunityCardList comments={comments} deleteComment={deleteComment} updateComment={updateComment} user_id={user_id} />
         <CommunityComment addComment={addComment} user_id={user_id} user={user} />
         

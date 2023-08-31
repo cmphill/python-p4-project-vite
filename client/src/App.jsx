@@ -2,7 +2,7 @@ import './App.css';
 import {createBrowserRouter, Route, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
 import CommunityComment from './components/CommunityComment';
-import TripComment from './components/TripComment';
+import TripMain from './components/TripMain';
 import Home from './components/Home.jsx';
 import Personal from './components/Personal.jsx';
 import Login from './components/Login.jsx';
@@ -10,6 +10,7 @@ import SignUpForm from './components/SignupForm';
 import Layout from "./components/Layout";
 import Community from './components/Community';
 import CommunityLayout from './components/CommunityLayout';
+import { tripLoader } from './components/TripMain';
 
 
 
@@ -18,9 +19,8 @@ import CommunityLayout from './components/CommunityLayout';
 function App() {
 
     const [user, setUser] = useState(null)
-    const [trip, setTrip] = useState(null)
+    const [comment, setComments] = useState(null)
     const [communityComments, setCommunityComments] = useState([])
-    const [tripComments, setTripComments] = useState([])
 
     useEffect( () => {
         fetch("/api/check_session").then(( response ) => {
@@ -34,14 +34,14 @@ function App() {
     }, [])
 
     useEffect(() => {
-      fetch('/api/communitycomments').then((res) => {
-        if (res.ok) {
-          res.json().then((comcomments) => {
-            setCommunityComments(comcomments)
-          })
-        }
-      })
-    }, [])
+        fetch('/api/communitycomments').then((res) => {
+          if (res.ok) {
+            res.json().then((comcomments) => {
+              setCommunityComments(comcomments)
+            })
+          }
+        })
+      }, [])
 
 
     function handleLogin(user) {
@@ -82,7 +82,7 @@ function App() {
             <Route path="login" element={<Login onLogin={handleLogin}/>}/>
             <Route path="signup" element={<SignUpForm onSignup={handleLogin}/>} />
             <Route path="community" element={<CommunityLayout/>}>
-                <Route path="trip-posts" element={<TripComment/>} />
+                <Route path="trip-posts" loader={tripLoader} element={<TripMain />} />
                 <Route path="community-posts" element={<Community 
                 comments={communityComments}
                 addComment={addCommunityComment}

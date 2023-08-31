@@ -137,6 +137,11 @@ api.add_resource(UserById, '/users/<int:id>')
 class Trips(Resource):
     def get(self):
         trips = [t.to_dict() for t in Trip.query.all()]
+        
+        for t in trips:
+            u = User.query.filter_by(id=t["owner_id"]).first()
+            t["owner_name"] = u.username
+
         return trips, 200
     def post(self):
         data = request.get_json()

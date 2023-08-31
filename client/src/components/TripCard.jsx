@@ -1,7 +1,7 @@
-export default function TripCard({owner, data}) {
+export default function TripCard({owner = null, data}) {
 
     // console.log(data);
-    // console.log(owner);
+    owner ? owner : owner = data.owner_name
 
     const inputDate = new Date('2023-07-18 13:06:17');
     const options = {
@@ -18,7 +18,7 @@ export default function TripCard({owner, data}) {
     const formatted_time_end = formatter.format(new Date (data.time_end));
     
     return (
-        <div className="trip-card bg-red-200 border-2 rounded">
+        <div className="trip-card mb-3  bg-red-200 border-2 rounded">
             <div className="col-span-1 row-span-2 rounded ">
                 <img className="p-1" src={data.image_url} />
             </div>
@@ -41,7 +41,7 @@ export default function TripCard({owner, data}) {
                 <p className="text-xs">{formatted_time_start}</p>
             </div>
             <div className="col-span-1 flex items-end justify-center">
-                <p className="text-xs">{" ----->"} </p>
+                <p className="text-xs">{"----->"} </p>
             </div>
             <div className="col-span-1 flex items-end justify-start">
                 <p className="text-xs">{formatted_time_end}</p>
