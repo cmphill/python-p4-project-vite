@@ -1,7 +1,7 @@
-export default function TripCard({owner, data}) {
+export default function TripCard({owner = null, data}) {
 
     // console.log(data);
-    // console.log(owner);
+    owner ? owner : owner = data.owner_name
 
     const inputDate = new Date('2023-07-18 13:06:17');
     const options = {

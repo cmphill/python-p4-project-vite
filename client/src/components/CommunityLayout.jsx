@@ -9,8 +9,8 @@ function CommunityLayout() {
     <div className = 'CommunityLayout'>
         <header>
             <div className="PostsNavigtor">
-                <nav className="flex place-content-between m-4 px-4">
-                    <div className='header-container flex gap-3 place-content-evenly'>
+                <nav className="flex place-content-between justify-center m-4 px-4">
+                    <div className='header-container flex gap-10'>
                         <NavLink to='community-posts'> Community Posts </NavLink>
                         <NavLink to='trip-posts'> Trip Posts </NavLink>
                     </div>
