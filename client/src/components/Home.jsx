@@ -3,7 +3,11 @@
 function Home() {
     return (
     <> 
-    <h1>This is the home page</h1>
+    <div className='main'>
+        <h1>Welcome to Triply</h1>
+        <p>Track your journeys, share your progress and connect with a network of fellow roamers! </p>
+        
+    </div>
     
     </>
     )
