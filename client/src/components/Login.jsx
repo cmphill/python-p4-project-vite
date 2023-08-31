@@ -28,7 +28,7 @@ export default function Login({ onLogin }) {
         }).then(res => {
           if(res.ok) {
             res.json().then(user => onLogin(user))
-            navigate('/')
+            navigate('../personal')
           }
           else {
              Error('invalid credentials')

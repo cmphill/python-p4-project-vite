@@ -40,7 +40,7 @@ export default function SignUpForm({onSignup}) {
                 if(res.ok) {
                     res.json().then(user => onSignup(user))
                     console.log("signed up in successfully");
-                    navigate('/')
+                    navigate('../personal')
                 }
                 else {
                     res.json().then(errors => {

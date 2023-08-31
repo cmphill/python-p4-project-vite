@@ -44,7 +44,7 @@ function App() {
             <Route path="login" element={<Login onLogin={handleLogin}/>}/>
             <Route path="signup" element={<SignUpForm onSignup={handleLogin}/>} />
             <Route path="community" element={<Community/>} />
-            <Route path="personal" element={<Personal/>} />
+            <Route path="personal" element={<Personal user={user}/>} />
 
         </Route>
         )
