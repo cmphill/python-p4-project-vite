@@ -43,7 +43,7 @@ function TripComment({ user }) {
     <div className="TripComment">
     <form onSubmit={formik.handleSubmit}>
         <div className="form-group">
-            <label htmlFor="comment">Comment</label>
+            <label htmlFor="comment">Comment from trip</label>
             <textarea style={{resize: "none"}}className="rounded border-b-2 border-black" type="text" rows="3" name="comment" placeholder="comment" value={formik.values.comment} onChange={formik.handleChange} />
             {formik.errors.content && formik.touched.content && <div className="error">{formik.errors.content}</div>}
         </div>

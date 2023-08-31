@@ -19,6 +19,7 @@ function App() {
 
     const [user, setUser] = useState(null)
     const [trip, setTrip] = useState(null)
+    const [comment, setComments] = useState(null)
 
     useEffect( () => {
         fetch("/api/check_session").then(( response ) => {

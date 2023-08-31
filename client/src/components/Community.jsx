@@ -1,13 +1,15 @@
 import {useEffect, useState} from 'react';
 import CommunityCardList from './CommunityCardList';
-import CommunityCard from './CommunityCard';
+import CommunityComment from './CommunityComment';
 function Community() {
     return (
         <div>
         <h1>testing</h1>
-        // <CommunityCardList />
+        <CommunityCardList />
+        <CommunityComment />
         </div>
-    )
+    );
+
 }
 
 export default Community;
