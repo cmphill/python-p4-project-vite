@@ -53,3 +53,15 @@
     grid-template-columns: repeat(3,1fr);
     grid-auto-rows: minmax(3rem, auto);
 }
+
+.trip-container {
+    display: grid;
+    grid-template-columns: 30rem 40rem;
+    grid-gap: 1rem;
+}
+
+.comment-section {
+    position: sticky;
+    top: 8rem;
+    height: 80vh;
+}

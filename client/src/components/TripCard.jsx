@@ -18,7 +18,7 @@ export default function TripCard({owner = null, data}) {
     const formatted_time_end = formatter.format(new Date (data.time_end));
     
     return (
-        <div className="trip-card bg-red-200 border-2 rounded">
+        <div className="trip-card mb-3  bg-red-200 border-2 rounded">
             <div className="col-span-1 row-span-2 rounded ">
                 <img className="p-1" src={data.image_url} />
             </div>
