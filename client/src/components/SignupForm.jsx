@@ -40,7 +40,6 @@ export default function SignUpForm({addUser}) {
                 if(res.ok) {
                     res.json().then(user => addUser(user))
                     navigate('/')
-                    
                 }
                 else {
                     res.json().then(errors => {
@@ -54,40 +53,40 @@ export default function SignUpForm({addUser}) {
     })
 
     return (
-        <div className="signup-container p-10 flex-col flex items-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-3 border-gray-700 border-2 rounded-md p-2">
+        <div className="signup-container p-2 flex-auto flex-col flex items-center">
+            <form onSubmit={formik.handleSubmit} className="z-10 flex flex-col gap-3 bg-red-300 border-red-800 border-2 rounded-md p-6">
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Username</label>
-                <input className="pr-60 border-b-2 border-black" type="text" name="username" placeholder="username" value={formik.values.username} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black" type="text" name="username" placeholder="username" value={formik.values.username} onChange={formik.handleChange} />
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Password</label>
-                <input className="pr-60 border-b-2 border-black" type="text" name="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black" type="text" name="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} />
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Password Confirmation</label>    
-                <input className="pr-60 border-b-2 border-black" type="text" name="password_confirmation" placeholder="Password Confirmation" value={formik.values.password_confirmation} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black" type="text" name="password_confirmation" placeholder="Password Confirmation" value={formik.values.password_confirmation} onChange={formik.handleChange} />
 
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Location</label>
-                <input className="pr-60 border-b-2 border-black" type="text" name="location" placeholder="location" value={formik.values.location} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black" type="text" name="location" placeholder="location" value={formik.values.location} onChange={formik.handleChange} />
 
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Age</label>
-                <input className="pr-60 border-b-2 border-black" type="text" name="age" placeholder="age" value={formik.values.age} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black" type="text" name="age" placeholder="age" value={formik.values.age} onChange={formik.handleChange} />
 
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Bio</label>
-                <input className="pr-60 border-b-2 border-black" type="text" name="bio" placeholder="bio" value={formik.values.bio} onChange={formik.handleChange} />
+                <textarea style={{resize: "none"}}className="rounded border-b-2 border-black" type="text" rows="3" name="bio" placeholder="bio" value={formik.values.bio} onChange={formik.handleChange} />
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Image_url</label>
-                <input className="pr-60 border-b-2 border-black" type="text" name="image_url" placeholder="image url" value={formik.values.image_url} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black" type="text" name="image_url" placeholder="image url" value={formik.values.image_url} onChange={formik.handleChange} />
 
-                <input className="border-black border-2 rounded-md" type="submit" />
+                <input className="btn border-black border-2 rounded-md" type="submit" />
 
             </form>
-
-            <div className="flex flex-col gap-2 mt-2">
-                {formik.errors&& Object.values(formik.errors).map(error => <h3  style={{color: "red"}}>{error.toUpperCase()}</h3>)}
+            <div className="inset-x-40 top fixed flex flex-col gap-2 mt-2">
+                {formik.errors&& Object.values(formik.errors).map( (error, index) => <h3  key={index} style={{color: "red"}}>{error.toUpperCase()}</h3>)}
             </div>
         </div>
+    
     )
 }
