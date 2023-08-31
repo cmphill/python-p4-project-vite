@@ -68,7 +68,14 @@
 
 .community-comments-container {
     display: grid;
-    grid-template-columns: repeat(3,15rem);
+    grid-template-columns: repeat(3,15vw);
     grid-template-rows: 2rem 4rem 2rem;
     grid-auto-rows: minmax(1rem, auto);
 }
+
+.community-comment-form {
+    position: sticky;
+    bottom: 70vh;
+    margin-left: 5vw;
+}
+
