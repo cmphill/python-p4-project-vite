@@ -1,12 +1,42 @@
-import { useState } from 'react';
+import { useFormik } from "formik";
+import * as yup from "yup";
 
+function CommunityComment({ user }) {
+  const [comment, setComment] = useState("");
 
-function CommunityComment() {
-    // const {id, username, content, trip_id, created_at, updated_at} = comment;
-    return (
-        <h1> This is a community comment</h1>
-    )
+  const formSchema = yup.object().shape({
+    comment: yup.string().max(500, 'maxium 500 characters').required("Must enter a comment"),
+  });
 
+  const formik = useFormik({
+    initialValues: {
+      comment,
+    },
+    validationSchema: formSchema,
+    onSubmit: (values) => {
+      fetch("/api/tripcomments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+    },
+  });
 
+  const errors = formik.errors;
+
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      {errors.comment && <h3 style={{ color: "red" }}>{errors.comment.toUpperCase()}</h3>}
+      <input
+        type="text"
+        value={comment}
+        onChange={formik.handleChange("comment")}
+      />
+      <button type="submit">Add Comment</button>
+    </form>
+  );
 }
-export default CommunityComment
+
+export default CommunityComment;
