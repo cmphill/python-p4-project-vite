@@ -2,9 +2,14 @@
 
 function Home() {
     return (
-        <div>
-            <p>Dis is da Homes</p>
-        </div>
+    <> 
+    <div className='main'>
+        <h1>Welcome to Triply</h1>
+        <p>Track your journeys, share your progress and connect with a network of fellow roamers! </p>
+        
+    </div>
+    
+    </>
     )
 }
 
