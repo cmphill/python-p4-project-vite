@@ -3,7 +3,7 @@ import TripCard from "./TripCard";
 
 function Personal({user}) {
 
-    console.log(user);
+    // console.log(user);
     if (!(user)) {
         return (
             <>
@@ -12,12 +12,13 @@ function Personal({user}) {
             </>
         )
     }
+    // console.log(user.signups[0].trips);
 
     return (
         <div className="flex mt-2 flex-col items-center">
             <div className="grid-container">
-                <div className="rounded-full relative bg-gray-400 col-span-2 row-span-3">
-                    <img className="image-center " src="http://placehold.it" alt="test"/>
+                <div className="image-center-container rounded-full relative bg-gray-400 col-span-2 row-span-3">
+                    <img className="image-center " src={user.image_url} alt="test"/>
                 </div>
                 <div className="flex items-center justify-center border-2 col-span-3">
                     <p className="">{user.username}</p>
@@ -30,17 +31,16 @@ function Personal({user}) {
                 </div>
                 <div className="border-2 col-span-5 auto-rows-min">
                     <h1 className="font-bold mx-6 my-3">Bio</h1>
-                    {/* <p className="text-justify mx-6 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est repudiandae amet suscipit mollitia. Officia quidem quaerat nesciunt earum officiis magni impedit corporis voluptas dicta harum dolorem voluptate dolore fugiat doloremque vero, at perferendis reprehenderit voluptatem quae? Omnis nemo unde magnam!</p> */}
                     <p className="text-justify mx-6 mb-3">{user.personal_bio}</p>
 
                 </div>
-                <div className="col-span-5 auto-rows-min">
-                    <h1 className="font-bold mx-6 my-3">Trips </h1>
-                    <TripCard />
-                    {/* <TripCard />
-                    <TripCard />
-                    <TripCard />
-                    <TripCard /> */}
+                <div className="col-span-5 auto-rows-min flex flex-col gap-3">
+                    <h1 className="font-bold mx-6 my-3 border-b-2 border-red-500">Trips </h1>
+                    {user.signups ? user.signups.map( signup => {
+                        return <TripCard key={user.username + signup.name} owner={user.username} data={signup.trips}/>
+                    }) : 
+                    <p className="text-center font-bold"> This User Has No Trips </p>}
+
                 </div>
             </div>
         </div>

@@ -24,6 +24,10 @@
     border-bottom: 2px var(--logo) solid;
 }
 
+.image-center-container {
+    overflow: hidden;
+}
+
 .image-center {
     position: absolute;
     top: 50%;
@@ -31,6 +35,9 @@
     transform: translate(-50%, -50%);
     max-width: 100%;
     max-height: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 
 }
 
@@ -43,7 +50,6 @@
 
 .trip-card {
     display: grid;
-    grid-template-columns: repeat(5,5rem);
-    grid-gap: 1rem;
-    grid-auto-rows: minmax(3rem, auto)
+    grid-template-columns: repeat(3,1fr);
+    grid-auto-rows: minmax(3rem, auto);
 }
