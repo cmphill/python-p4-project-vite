@@ -1,16 +1,14 @@
 import CommunityCard from "./CommunityCard";
 
-function CommunityCardList({
+export default function CommunityCardList({
     user_id,
     comments,
     deleteComment,
     updateComment,
     }) {
 
-    console.log(comments);
     return (
-        <div className="community-card-list">
-            <ul>
+        <div className="community-card-list flex flex-col items-center gap-3">
                 {comments.map((comment) => (
                     <CommunityCard
                         comment={comment}
@@ -24,11 +22,7 @@ function CommunityCardList({
                         updateComment={() => updateComment(comment.id)}
                     />
                 ))}
-            </ul>
-
-        
         </div>
     )
 }
 
-export default CommunityCardList;
