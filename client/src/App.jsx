@@ -19,7 +19,19 @@ function App() {
 
     const [user, setUser] = useState(null)
     const [trip, setTrip] = useState(null)
-    const [comment, setComments] = useState(null)
+    const [communityComments, setCommunityComments] = useState([])
+    const [tripComments, setTripComments] = useState([])
+
+
+    useEffect(() => {
+      fetch('/api/communitycomments').then((res) => {
+        if (res.ok) {
+          res.json().then((comcomments) => {
+            setCommunityComments(comcomments)
+          })
+        }
+      })
+    })
 
     useEffect( () => {
         fetch("/api/check_session").then(( response ) => {
@@ -39,6 +51,26 @@ function App() {
         setUser(null);
     }
 
+    function addCommunityComment(new_comment) {
+        setCommunityComments([...communityComments, new_comment])
+    }
+
+    function handleDeleteCommunityComment(id) {
+      const updatedComments = communityComments.filter((comment) => comment.id !== id)
+      setMessages(updatedMessages)
+    }
+
+    function handleUpdateCommunityComment(id, new_text) {
+      const updated_comment = communityComments.map((comment) => {
+        if (comment.id === id) {
+          return new_text
+        } else {
+          return comment
+        }
+      })
+      setCommunityComments(updated_comment)
+    }
+
 
     const router = createBrowserRouter(
         createRoutesFromElements(
@@ -51,7 +83,13 @@ function App() {
             <Route path="signup" element={<SignUpForm onSignup={handleLogin}/>} />
             <Route path="community" element={<CommunityLayout/>}>
                 <Route path="trip-posts" element={<TripComment/>} />
-                <Route path="community-posts" element={<Community/>} />
+                <Route path="community-posts" element={<Community 
+                comments={communityComments}
+                addComment={addCommunityComment}
+                deleteComment={handleDeleteCommunityComment}
+                updateComment={handleUpdateCommunityComment}
+
+                />} />
             </Route>
             <Route path="personal" element={<Personal user={user}/>} />
 

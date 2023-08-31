@@ -1,17 +1,29 @@
 import { useState } from 'react'
 
-function CommunityCard({user, comment}) {
+function CommunityCard({
+    key, 
+    content, 
+    username,
+    created_at, 
+    updated_at, 
+    deleteComment, 
+    updateComment}) {
+        function handleUpdateComment(updatedComment) {
+            updateComment(updatedComment)
+        }
+        function handleDeleteComment() {
+            fetch(`/api/communitycomments/${id}`, {
+                method: 'DELETE',
+            })
+            deleteComment(id)
+        }
+
 
     return (
 
-        <div className="community-card">
-            <span>{user.username}</span>
-            <span>{comment.created_at}</span>
-            <p>{comment.updated_at}</p>
-            <p>{comment.body}</p>
-
-
-        </div>
+        <li>
+            
+        </li>
     )
 }
 

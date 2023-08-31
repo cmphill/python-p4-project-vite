@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function CommunityComment({ user }) {
-  const [comment, setComment] = useState("");
+function CommunityComment({ setComment }) {
+  
   const [errors, setErrors] = useState({})
 
   const formSchema = yup.object().shape({
