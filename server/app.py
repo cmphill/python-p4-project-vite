@@ -5,7 +5,7 @@
 # Remote library imports
 from flask import request, make_response, session
 from flask_restful import Resource, Api
-
+from datetime import datetime
 # Local imports
 from config import app, api, db
 
@@ -19,8 +19,7 @@ api = Api(app)
 @app.before_request
 def check_if_logged_in():
     open_access_list=[
-        "login", "logout", "check_session", "communitycomments","tripbyid", "users", "userbyid",
-
+        "login", "logout", "check_session", "communitycomments","tripbyid", "users", "userbyid", "trips"
     ]
 
     if (request.endpoint) not in open_access_list and (not session.get("user_id")):
@@ -139,6 +138,39 @@ class Trips(Resource):
     def get(self):
         trips = [t.to_dict() for t in Trip.query.all()]
         return trips, 200
+    def post(self):
+        data = request.get_json()
+        name = data['name']
+        decsription = data['description']
+        location = data['location']
+        distance = data['distance']
+        time_start = data['time_start']
+        time_end = data['time_end']
+        image_url = data['image_url']
+        owner_id = session.get("user_id")
+        
+
+        if image_url and owner_id and name and decsription and time_start and time_end and location and distance:
+            newTrip = Trip(
+                name = name,
+                description = decsription,
+                owner_id = owner_id,
+                location = location,
+                distance = int(distance),
+                time_start = datetime.strptime(time_start, "%Y-%m-%d %H:%M:%S.%f"),
+                time_end = datetime.strptime(time_end, "%Y-%m-%d %H:%M:%S.%f"),
+                image_url = image_url
+            )
+            db.session.add(newTrip)
+            db.session.commit()
+
+            newSignup = Signup(user_id = owner_id, trip_id = newTrip.id)
+
+            db.session.add(newSignup)
+            db.session.commit()
+
+            return newTrip.to_dict(), 201
+
 
 class TripById(Resource):
     def get(self, id):

@@ -6,7 +6,12 @@
 .header-container a {
     border-bottom: 3px var(--logo) solid;
     font-weight: 600;
-    padding: 0.5rem
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.header-container a.active {
+    border: 3px var(--logo) solid;
 }
 
 .btn:hover {
