@@ -1,4 +1,5 @@
 import {NavLink, Outlet} from 'react-router-dom';
+import logo from "../assets/Triply_logo.png"
 
 
 function Layout({user, onLogout}) {
@@ -16,7 +17,7 @@ function Layout({user, onLogout}) {
             <div className="NavBar">
                 <nav className="flex place-content-between m-4 px-4">
                     <div>
-                        <img src='./assets/logo.png'/>
+                        <img className="logo_img" src={logo} alt="Logo"/>
                     </div>
                     <div className='header-container flex gap-3 place-content-evenly'>
                         <NavLink to="/">Home</NavLink>

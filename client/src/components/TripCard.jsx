@@ -18,23 +18,23 @@ export default function TripCard({owner = null, data}) {
     const formatted_time_end = formatter.format(new Date (data.time_end));
     
     return (
-        <div className="trip-card mb-3  bg-red-200 border-2 rounded">
+        <div className="trip-card mb-3  bg-red-400 border-2 border-gray-600 text-gray-800 rounded">
             <div className="col-span-1 row-span-2 rounded ">
                 <img className="p-1" src={data.image_url} />
             </div>
-            <div className="col-span-1 flex items-center justify-center">
-                <p>{data.name}</p>
+            <div className="col-span-1 flex items-center justify-center ">
+                <p className="border-gray-600 border-b-2">{data.name}</p>
             </div>
-            <div className="col-span-1 flex items-center justify-center">
-                <p>{owner}</p>
+            <div className="col-span-1 flex items-center justify-center ">
+                <p className="border-gray-600 border-b-2">{owner}</p>
             </div>
-            <div className="col-span-1 flex items-center justify-center">
-                <p>{data.location}</p>
+            <div className="col-span-1 flex items-center justify-center ">
+                <p className="border-gray-600 border-b-2">{data.location}</p>
             </div>
-            <div className="col-span-1 flex items-center justify-center">
-                <p>{data.distance} miles</p>
+            <div className="col-span-1 flex items-center justify-center ">
+                <p className="border-gray-600 border-b-2">{data.distance} miles</p>
             </div>
-            <div className="col-span-3 m-2">
+            <div className="col-span-3 m-2 border-gray-600 border-b-2">
                 <p>{data.description}</p>
             </div>
             <div className="col-span-1 flex items-end justify-start">

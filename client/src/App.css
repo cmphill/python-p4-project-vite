@@ -1,3 +1,7 @@
+.logo_img {
+    height: 3rem
+}
+
 .header-container a:hover {
     color: var(--logo);
     transition: 0.25s ease-out
@@ -14,8 +18,8 @@
     border: 3px var(--logo) solid;
 }
 
-.btn:hover {
-    background-color: whitesmoke;
+.btn1:hover {
+    background-color: grey;
     cursor: pointer;
     transition: 0.25s ease-out
 }

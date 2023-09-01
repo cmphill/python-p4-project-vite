@@ -69,15 +69,15 @@ function CommunityCard({
     
 
     return (
-            <div className='community-comments-container bg-red-300 p-3 rounded'>
-                <p className='user'>{username}</p>
-                <p className='created_at text-xs col-start-3'>{formatted_created_at}</p>
+            <div className='community-comments-container bg-red-400 p-3 rounded'>
+                <p className='user text-gray-800'>{username}</p>
+                <p className='created_at text-xs col-start-3 text-gray-800'>{formatted_created_at}</p>
                 {isEditing ? <input className="col-span-3 rounded border-black p-1" type="text" value={text} onChange={handleInputChange}/> : 
-                <p className='col-span-3 rounded bg-gray-400 border-2 border-black p-1'>{text}</p>}
+                <p className='col-span-3 rounded bg-gray-200 text-gray-800 border-2 border-black p-1'>{text}</p>}
                 {user_id === comment.user_id ? 
                 <>
-                <button onClick={handleTextChange} className='btn col-start-1 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'>{isEditing ? "Save" : "Edit"}</button>
-                <button onClick={handleDeleteComment}className='btn col-start-3 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'>Delete</button>
+                <button onClick={handleTextChange} className='btn1 text-gray-800 col-start-1 row-start-3 flex justify-center items-center border-2 rounded border-gray-800 m-1.5'>{isEditing ? "Save" : "Edit"}</button>
+                <button onClick={handleDeleteComment} className='btn1 text-gray-800 col-start-3 row-start-3 flex justify-center items-center border-2 rounded border-gray-800 m-1.5'>Delete</button>
                 </>
                 : null
                 }
