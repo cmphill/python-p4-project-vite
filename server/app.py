@@ -280,7 +280,6 @@ class CommunityCommentById(Resource):
         comment = CommunityComment.query.filter_by(id=id).first()
         if comment:
             data = request.get_json()
-            print(data)
             try: 
                 for attr in request.get_json():
                     setattr(comment, attr, request.get_json()[attr])

@@ -26,7 +26,11 @@ function CommunityCard({
     const [text, setText] = useState(content);
 
     const handleTextChange = () => {
-        setIsEditing(true);
+        if (isEditing) {
+            handleInputBlur()
+        }
+        setIsEditing(!isEditing);
+
     };
 
     const handleInputChange = (e) => {
@@ -34,7 +38,6 @@ function CommunityCard({
     };
 
     const handleInputBlur = () => {
-        setIsEditing(false);
         fetch(`/api/communitycomments/${comment.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -42,7 +45,9 @@ function CommunityCard({
         })
         .then(response => {
             if (response.ok) {
-                return
+                if (isEditing) {
+                    setIsEditing(!isEditing);
+                }
             } 
             else {
                 response.json().then(errors => console.log(errors))
@@ -67,11 +72,11 @@ function CommunityCard({
             <div className='community-comments-container bg-red-300 p-3 rounded'>
                 <p className='user'>{username}</p>
                 <p className='created_at text-xs col-start-3'>{formatted_created_at}</p>
-                {isEditing ? <input className="col-span-3 rounded border-black p-1" type="text" value={text} onChange={handleInputChange} onBlur={handleInputBlur} autoFocus /> : 
+                {isEditing ? <input className="col-span-3 rounded border-black p-1" type="text" value={text} onChange={handleInputChange}/> : 
                 <p className='col-span-3 rounded bg-gray-400 border-2 border-black p-1'>{text}</p>}
                 {user_id === comment.user_id ? 
                 <>
-                <button onClick={handleTextChange} className='btn col-start-1 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'>Edit</button>
+                <button onClick={handleTextChange} className='btn col-start-1 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'>{isEditing ? "Save" : "Edit"}</button>
                 <button onClick={handleDeleteComment}className='btn col-start-3 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'>Delete</button>
                 </>
                 : null
