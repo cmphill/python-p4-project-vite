@@ -57,7 +57,7 @@ function App() {
 
     function handleDeleteCommunityComment(id) {
       const updatedComments = communityComments.filter((comment) => comment.id !== id)
-      setMessages(updatedMessages)
+      setCommunityComments(updatedComments);
     }
 
     function handleUpdateCommunityComment(id, new_text) {

@@ -28,18 +28,18 @@ function CommunityCard({
             updateComment(updatedComment)
         }
         else {
-            error("You are not authorized to update this comment")
+            console.error("You are not authorized to update this comment")
         }
     }
     function handleDeleteComment() {
         if (user_id === comment.user_id) {
-            fetch(`/api/communitycomments/${id}`, {
+            fetch(`/api/communitycomments/${comment.id}`, {
                 method: 'DELETE',
             })
-            deleteComment(id)
+            deleteComment(comment.id)
         }
         else {
-            error("You are not authorized to delete this comment")
+            console.error("You are not authorized to delete this comment")
         }
     }
     
@@ -50,7 +50,7 @@ function CommunityCard({
                 <p className='created_at col-start-3'>{formatted_created_at}</p>
                 <p className='col-span-3 rounded bg-gray-400 border-2 border-black p-1'>{content}</p>
                 <button className='btn col-start-1 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'>Update</button>
-                <button className='btn col-start-3 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'>Delete</button>
+                <button onClick={handleDeleteComment}className='btn col-start-3 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'>Delete</button>
             </div>
     )
 }
