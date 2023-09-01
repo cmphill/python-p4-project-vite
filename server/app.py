@@ -253,6 +253,20 @@ class CommunityComments(Resource):
     def get(self):
         comments = [c.to_dict() for c in CommunityComment.query.all()]
         return comments, 200
+    def post(self):
+        data = request.get_json()
+        print(data)
+        user_id = data["user_id"]
+        content = data["comment"]
+        if user_id and content:
+            newComment = CommunityComment(user_id=user_id, content=content)
+
+            db.session.add(newComment)
+            db.session.commit()
+
+            return newComment.to_dict(), 201
+        else: 
+            return {"error": "Could not create a new comment"}, 422
 
 class CommunityCommentById(Resource):
     def get(self, id):
