@@ -290,6 +290,16 @@ class CommunityCommentById(Resource):
                 return {'error': 'Could not update community comment'}, 422
         else:
             return {'error': 'Could not find community comment'}, 404
+    
+    def delete(self, id):
+        comment = CommunityComment.query.filter_by(id=id).first()
+        if comment:
+            db.session.delete(comment)
+            db.session.commit()
+
+            return "", 204
+        else:
+            return {'error': 'Could not find community comment'},
 
 class CheckSessions(Resource):
     def get(self):
