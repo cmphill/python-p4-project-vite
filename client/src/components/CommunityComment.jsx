@@ -22,16 +22,17 @@ function CommunityComment({ addComment, user_id, user }) {
             "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                values,
+                comment: values.comment,
                 user_id: user_id
             }),
         }).then(res => {
             if (res.ok) {
                 res.json().then(values => addComment(values))
+                formik.resetForm()
                 }
             else {
             res.json().then(errors => {
-                console.log('we\'ve got errors')
+                console.log("we've got errors")
                 setErrors(errors.message)
                 console.log(errors)
             })
