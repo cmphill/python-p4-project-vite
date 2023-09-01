@@ -279,13 +279,15 @@ class CommunityCommentById(Resource):
     def patch(self, id):
         comment = CommunityComment.query.filter_by(id=id).first()
         if comment:
+            data = request.get_json()
+            print(data)
             try: 
                 for attr in request.get_json():
                     setattr(comment, attr, request.get_json()[attr])
                 db.session.add(comment)
                 db.session.commit()
 
-                return comment.to_dict(), 200
+                return comment.to_dict(), 202
             except:
                 return {'error': 'Could not update community comment'}, 422
         else:
