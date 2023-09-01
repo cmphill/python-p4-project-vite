@@ -28,7 +28,7 @@ function TripComment({ user }) {
             }
         else {
          res.json().then(errors => {
-            console.log('we\'ve got errors')
+            console.log("we've got errors")
             setErrors(errors.message)
             console.log(errors)
          })

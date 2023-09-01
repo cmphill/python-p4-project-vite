@@ -1,4 +1,4 @@
-export default function TripCard({owner = null, data}) {
+export default function TripCard({owner = null, data, handleClick=null}) {
 
     // console.log(data);
     owner ? owner : owner = data.owner_name
@@ -13,12 +13,19 @@ export default function TripCard({owner = null, data}) {
     year: 'numeric'
     };
 
+    if (handleClick === null) { 
+        handleClick = function (d){
+            return
+        }
+    }
+
+
     const formatter = new Intl.DateTimeFormat('en-US', options);
     const formatted_time_start = formatter.format(new Date (data.time_start));
     const formatted_time_end = formatter.format(new Date (data.time_end));
     
     return (
-        <div className="trip-card mb-3  bg-red-400 border-2 border-gray-600 text-gray-800 rounded">
+        <div onClick={() => handleClick(data)}className="trip-card mb-3  bg-red-400 border-2 border-gray-600 text-gray-800 rounded">
             <div className="col-span-1 row-span-2 rounded ">
                 <img className="p-1" src={data.image_url} />
             </div>
