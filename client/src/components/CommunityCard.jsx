@@ -47,7 +47,7 @@ function CommunityCard({
     return (
             <div className='community-comments-container bg-red-300 p-3 rounded'>
                 <p className='user'>{username}</p>
-                <p className='created_at col-start-3'>{formatted_created_at}</p>
+                <p className='created_at text-xs col-start-3'>{formatted_created_at}</p>
                 <p className='col-span-3 rounded bg-gray-400 border-2 border-black p-1'>{content}</p>
                 <button className='btn col-start-1 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'onClick={(e) => handleUpdateComment(e.target)}>Update</button>
                 <button className ='btn col-start-3 row-start-3 flex justify-center items-center border-2 rounded border-grey-500 m-1.5'onClick={(e) => handleDeleteComment(e.target)}>Delete </button>

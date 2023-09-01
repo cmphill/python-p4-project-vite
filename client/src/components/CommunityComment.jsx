@@ -16,19 +16,18 @@ function CommunityComment({ addComment, user_id, user }) {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
+            console.log(values)
         fetch("/api/communitycomments", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                comment: values.comment,
-                user_id: user_id
-            }),
+            body: JSON.stringify(values),
         }).then(res => {
             if (res.ok) {
                 res.json().then(values => addComment(values))
                 formik.resetForm()
+                resetForm()
                 }
             else {
             res.json().then(errors => {
