@@ -23,7 +23,7 @@ function CommunityComment({ addComment, user_id, user }) {
         },
         body: JSON.stringify({
             values,
-            user_id: user_id
+            user_id,
         }),
       }).then(res => {
         if (res.ok) {
