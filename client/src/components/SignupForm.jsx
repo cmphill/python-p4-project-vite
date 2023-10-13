@@ -55,31 +55,31 @@ export default function SignUpForm({onSignup}) {
 
     return (
         <div className="signup-container p-2 flex-auto flex-col flex items-center">
-            <form onSubmit={formik.handleSubmit} className="z-10 flex flex-col gap-3 bg-red-300 border-red-800 border-2 rounded-md p-6">
+            <form onSubmit={formik.handleSubmit} className="z-10 flex flex-col gap-3 bg-red-400 text-gray-800 border-red-800 border-2 rounded-md p-6">
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Username</label>
-                <input className="rounded border-b-2 border-black" type="text" name="username" placeholder="username" value={formik.values.username} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black text-gray-200" type="text" name="username" placeholder="username" value={formik.values.username} onChange={formik.handleChange} />
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Password</label>
-                <input className="rounded border-b-2 border-black" type="text" name="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black text-gray-200" type="text" name="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} />
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Password Confirmation</label>    
-                <input className="rounded border-b-2 border-black" type="text" name="password_confirmation" placeholder="Password Confirmation" value={formik.values.password_confirmation} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black text-gray-200" type="text" name="password_confirmation" placeholder="Password Confirmation" value={formik.values.password_confirmation} onChange={formik.handleChange} />
 
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Location</label>
-                <input className="rounded border-b-2 border-black" type="text" name="location" placeholder="location" value={formik.values.location} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black text-gray-200" type="text" name="location" placeholder="location" value={formik.values.location} onChange={formik.handleChange} />
 
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Age</label>
-                <input className="rounded border-b-2 border-black" type="text" name="age" placeholder="age" value={formik.values.age} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black text-gray-200" type="text" name="age" placeholder="age" value={formik.values.age} onChange={formik.handleChange} />
 
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Bio</label>
-                <textarea style={{resize: "none"}}className="rounded border-b-2 border-black" type="text" rows="3" name="bio" placeholder="bio" value={formik.values.bio} onChange={formik.handleChange} />
+                <textarea style={{resize: "none"}}className="rounded border-b-2 border-black text-gray-200" type="text" rows="3" name="bio" placeholder="bio" value={formik.values.bio} onChange={formik.handleChange} />
 
                 <label className="pr-60 border-b-2 border-red-500 font-bold">Image_url</label>
-                <input className="rounded border-b-2 border-black" type="text" name="image_url" placeholder="image url" value={formik.values.image_url} onChange={formik.handleChange} />
+                <input className="rounded border-b-2 border-black text-gray-200" type="text" name="image_url" placeholder="image url" value={formik.values.image_url} onChange={formik.handleChange} />
 
                 <input className="btn border-black border-2 rounded-md" type="submit" />
 
